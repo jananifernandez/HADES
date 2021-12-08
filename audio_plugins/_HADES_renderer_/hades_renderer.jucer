@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="lfkRjX" name="hades_renderer" projectType="audioplug" version="1.0.0"
+              bundleIdentifier="com.LeoMcCormack.compass" includeBinaryInAppConfig="1"
+              buildVST="1" buildAU="0" pluginName="hades_renderer" pluginDesc="hades_renderer"
+              pluginManufacturer="AALTO" pluginManufacturerCode="LEOM" pluginCode="HADE"
+              pluginIsSynth="0" pluginWantsMidiIn="0" pluginProducesMidiOut="0"
+              pluginSilenceInIsSilenceOut="0" pluginEditorRequiresKeys="0"
+              pluginRTASCategory="" aaxIdentifier="com.yourcompany.no" pluginAAXCategory="2"
+              buildVST3="0" buildRTAS="0" buildAAX="0" pluginManufacturerEmail="support@yourcompany.com"
+              companyName="Aalto" companyEmail="leo.t.mccormack@gmail.com"
+              userNotes="_CRT_SECURE_NO_WARNINGS&#10;_WINSOCK_DEPRECATED_NO_WARNINGS&#10;"
+              buildAUv3="0" pluginIsMidiEffectPlugin="0" displaySplashScreen="0"
+              reportAppUsage="0" splashScreenColour="Dark" buildStandalone="0"
+              enableIAA="0" cppLanguageStandard="14" companyCopyright="Aalto"
+              pluginFormats="buildVST" jucerFormatVersion="1">
+  <MAINGROUP id="imnfnp" name="hades_renderer">
+    <FILE id="gZgzcr" name="HADESLookAndFeel.h" compile="0" resource="0"
+          file="../resources/HADESLookAndFeel.h"/>
+    <FILE id="dJOC35" name="log2dSlider.cpp" compile="1" resource="0" file="../resources/log2dSlider.cpp"/>
+    <FILE id="eEivvP" name="log2dSlider.h" compile="0" resource="0" file="../resources/log2dSlider.h"/>
+    <FILE id="I2lsZk" name="EditWindow360.cpp" compile="1" resource="0"
+          file="src/EditWindow360.cpp"/>
+    <FILE id="oWqTmO" name="EditWindow360.h" compile="0" resource="0" file="src/EditWindow360.h"/>
+    <FILE id="V2KhTI" name="PluginEditor.cpp" compile="1" resource="0"
+          file="src/PluginEditor.cpp"/>
+    <FILE id="x1LyAO" name="PluginEditor.h" compile="0" resource="0" file="src/PluginEditor.h"/>
+    <FILE id="zzmeg8" name="PluginProcessor.cpp" compile="1" resource="0"
+          file="src/PluginProcessor.cpp"/>
+    <FILE id="wYlx2G" name="PluginProcessor.h" compile="0" resource="0"
+          file="src/PluginProcessor.h"/>
+    <GROUP id="{C717A916-3548-CC31-0660-D6F004BCAC2E}" name="hades_renderer">
+      <FILE id="zclHR6" name="hades_renderer.h" compile="0" resource="0"
+            file="../../C/examples/include/hades_renderer.h"/>
+      <FILE id="XXSmCA" name="hades_renderer_internal.c" compile="1" resource="0"
+            file="../../C/examples/src/hades_renderer/hades_renderer_internal.c"/>
+      <FILE id="mVHWMy" name="hades_renderer_internal.h" compile="0" resource="0"
+            file="../../C/examples/src/hades_renderer/hades_renderer_internal.h"/>
+      <FILE id="wpPBzT" name="hades_renderer.c" compile="1" resource="0"
+            file="../../C/examples/src/hades_renderer/hades_renderer.c"/>
+    </GROUP>
+    <GROUP id="{2A8305B9-BF8E-2545-18F2-2CDE0A720B85}" name="core">
+      <FILE id="kHho86" name="CMakeLists.txt" compile="0" resource="1" file="../../C/core/CMakeLists.txt"/>
+      <GROUP id="{7D6B500D-9C6A-AEF2-432A-741EE55D3FD4}" name="include">
+        <FILE id="JTELqf" name="temp_include.h" compile="0" resource="0" file="../../C/core/include/temp_include.h"/>
+      </GROUP>
+      <GROUP id="{DEA95E2B-86A7-0B82-00C0-313BF0788BA5}" name="saf_hades">
+        <FILE id="Ug5CbF" name="saf_hades.h" compile="0" resource="0" file="../../C/core/saf_hades/saf_hades.h"/>
+        <FILE id="W6y72b" name="saf_hades_analysis.c" compile="1" resource="0"
+              file="../../C/core/saf_hades/saf_hades_analysis.c"/>
+        <FILE id="HbAhdg" name="saf_hades_analysis.h" compile="0" resource="0"
+              file="../../C/core/saf_hades/saf_hades_analysis.h"/>
+        <FILE id="Tg1M2Z" name="saf_hades_internal.c" compile="1" resource="0"
+              file="../../C/core/saf_hades/saf_hades_internal.c"/>
+        <FILE id="PBzl3S" name="saf_hades_internal.h" compile="0" resource="0"
+              file="../../C/core/saf_hades/saf_hades_internal.h"/>
+        <FILE id="DtAoqN" name="saf_hades_synthesis.c" compile="1" resource="0"
+              file="../../C/core/saf_hades/saf_hades_synthesis.c"/>
+        <FILE id="IcXP7v" name="saf_hades_synthesis.h" compile="0" resource="0"
+              file="../../C/core/saf_hades/saf_hades_synthesis.h"/>
+      </GROUP>
+    </GROUP>
+    <GROUP id="{2F3DCBCA-FE0D-01A3-55CE-9C99E51181F5}" name="extern">
+      <GROUP id="{C8B0B7FC-30F5-D26E-239A-2273CFF8C7E4}" name="saf">
+        <GROUP id="{190A523D-666B-30B1-6791-2932FD286D18}" name="framework">
+          <GROUP id="{11E64754-8C4C-0A57-2439-4EDA320DE03D}" name="include">
+            <FILE id="m8lsap" name="saf.h" compile="0" resource="0" file="../../C/extern/saf/framework/include/saf.h"/>
+            <FILE id="esTIJA" name="saf_externals.h" compile="0" resource="0" file="../../C/extern/saf/framework/include/saf_externals.h"/>
+          </GROUP>
+          <GROUP id="{AD10B3CA-D64D-E776-F8E7-A4A7C1D7EC0C}" name="modules">
+            <GROUP id="{1CAEE4EE-4BD5-930C-C2E2-F003754E7B62}" name="saf_cdf4sap">
+              <FILE id="tFlDSL" name="saf_cdf4sap.c" compile="1" resource="0" file="../../C/extern/saf/framework/modules/saf_cdf4sap/saf_cdf4sap.c"/>
+              <FILE id="IVfk7K" name="saf_cdf4sap.h" compile="0" resource="0" file="../../C/extern/saf/framework/modules/saf_cdf4sap/saf_cdf4sap.h"/>
+            </GROUP>
+            <GROUP id="{8DAD482C-0E0A-0B10-78B4-B2EFC8CDFF02}" name="saf_hoa">
+              <FILE id="KRJd1G" name="saf_hoa.c" compile="1" resource="0" file="../../C/extern/saf/framework/modules/saf_hoa/saf_hoa.c"/>
+              <FILE id="J4aFBA" name="saf_hoa.h" compile="0" resource="0" file="../../C/extern/saf/framework/modules/saf_hoa/saf_hoa.h"/>
+              <FILE id="JK69PH" name="saf_hoa_internal.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_hoa/saf_hoa_internal.c"/>
+              <FILE id="IAhscK" name="saf_hoa_internal.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_hoa/saf_hoa_internal.h"/>
+            </GROUP>
+            <GROUP id="{027EDCD9-BC14-B30F-3ADE-2A8157E30D55}" name="saf_hrir">
+              <FILE id="ZgdDKf" name="saf_default_hrirs.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_hrir/saf_default_hrirs.c"/>
+              <FILE id="ZfkOqn" name="saf_hrir.c" compile="1" resource="0" file="../../C/extern/saf/framework/modules/saf_hrir/saf_hrir.c"/>
+              <FILE id="yA9gtQ" name="saf_hrir.h" compile="0" resource="0" file="../../C/extern/saf/framework/modules/saf_hrir/saf_hrir.h"/>
+            </GROUP>
+            <GROUP id="{0CD7B484-D989-4C5D-0F65-75C7AE6DC618}" name="saf_reverb">
+              <FILE id="TqX4Ul" name="saf_reverb.c" compile="1" resource="0" file="../../C/extern/saf/framework/modules/saf_reverb/saf_reverb.c"/>
+              <FILE id="rKegtj" name="saf_reverb.h" compile="0" resource="0" file="../../C/extern/saf/framework/modules/saf_reverb/saf_reverb.h"/>
+              <FILE id="IjZjR2" name="saf_reverb_internal.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_reverb/saf_reverb_internal.c"/>
+              <FILE id="hPtOo0" name="saf_reverb_internal.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_reverb/saf_reverb_internal.h"/>
+            </GROUP>
+            <GROUP id="{6DE2E10E-30C7-A9D6-2BBF-791EED4AE381}" name="saf_sh">
+              <FILE id="Cq0xAv" name="saf_sh.c" compile="1" resource="0" file="../../C/extern/saf/framework/modules/saf_sh/saf_sh.c"/>
+              <FILE id="tvQ7DX" name="saf_sh.h" compile="0" resource="0" file="../../C/extern/saf/framework/modules/saf_sh/saf_sh.h"/>
+              <FILE id="tKsEM1" name="saf_sh_internal.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_sh/saf_sh_internal.c"/>
+              <FILE id="OIgdBm" name="saf_sh_internal.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_sh/saf_sh_internal.h"/>
+            </GROUP>
+            <GROUP id="{3E6504AD-8DA6-66D1-23A6-428B5FA4B9A9}" name="saf_sofa_reader">
+              <GROUP id="{CCB574F5-F9C6-624D-FDAF-6C0501892570}" name="libmysofa">
+                <GROUP id="{336911B1-5D0E-1495-034F-4DC3428D68F8}" name="internal">
+                  <FILE id="wnWUxL" name="hdf_dataobject.c" compile="1" resource="0"
+                        file="../../C/extern/saf/framework/modules/saf_sofa_reader/libmysofa/internal/hdf_dataobject.c"/>
+                  <FILE id="tZQ3kA" name="hdf_fractalhead.c" compile="1" resource="0"
+                        file="../../C/extern/saf/framework/modules/saf_sofa_reader/libmysofa/internal/hdf_fractalhead.c"/>
+                  <FILE id="w25BpK" name="hdf_reader.c" compile="1" resource="0" file="../../C/extern/saf/framework/modules/saf_sofa_reader/libmysofa/internal/hdf_reader.c"/>
+                  <FILE id="QTH0Z9" name="hdf_reader.h" compile="0" resource="0" file="../../C/extern/saf/framework/modules/saf_sofa_reader/libmysofa/internal/hdf_reader.h"/>
+                  <FILE id="eZScdS" name="kdtree.c" compile="1" resource="0" file="../../C/extern/saf/framework/modules/saf_sofa_reader/libmysofa/internal/kdtree.c"/>
+                  <FILE id="wNq0B7" name="kdtree.h" compile="0" resource="0" file="../../C/extern/saf/framework/modules/saf_sofa_reader/libmysofa/internal/kdtree.h"/>
+                  <FILE id="ErdT1B" name="mysofa_internal.c" compile="1" resource="0"
+                        file="../../C/extern/saf/framework/modules/saf_sofa_reader/libmysofa/internal/mysofa_internal.c"/>
+                  <FILE id="OMTpxP" name="mysofa_internal.h" compile="0" resource="0"
+                        file="../../C/extern/saf/framework/modules/saf_sofa_reader/libmysofa/internal/mysofa_internal.h"/>
+                </GROUP>
+                <FILE id="vgGJfO" name="LICENSE" compile="0" resource="1" file="../../C/extern/saf/framework/modules/saf_sofa_reader/libmysofa/LICENSE"/>
+                <FILE id="vwnfo5" name="mysofa.c" compile="1" resource="0" file="../../C/extern/saf/framework/modules/saf_sofa_reader/libmysofa/mysofa.c"/>
+                <FILE id="OKvgJV" name="mysofa.h" compile="0" resource="0" file="../../C/extern/saf/framework/modules/saf_sofa_reader/libmysofa/mysofa.h"/>
+              </GROUP>
+              <FILE id="fRfh84" name="CMakeLists.txt" compile="0" resource="1" file="../../C/extern/saf/framework/modules/saf_sofa_reader/CMakeLists.txt"/>
+              <FILE id="A10Jpx" name="saf_sofa_reader.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_sofa_reader/saf_sofa_reader.c"/>
+              <FILE id="c3jIY9" name="saf_sofa_reader.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_sofa_reader/saf_sofa_reader.h"/>
+            </GROUP>
+            <GROUP id="{084356B0-833C-FEC4-B11D-7D341F4E1DDD}" name="saf_tracker">
+              <FILE id="F6FO0J" name="saf_tracker.c" compile="1" resource="0" file="../../C/extern/saf/framework/modules/saf_tracker/saf_tracker.c"/>
+              <FILE id="P0RpG5" name="saf_tracker.h" compile="0" resource="0" file="../../C/extern/saf/framework/modules/saf_tracker/saf_tracker.h"/>
+              <FILE id="CdeWTq" name="saf_tracker_internal.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_tracker/saf_tracker_internal.c"/>
+              <FILE id="kN6Y12" name="saf_tracker_internal.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_tracker/saf_tracker_internal.h"/>
+            </GROUP>
+            <GROUP id="{8B6E3BA9-FFD0-3246-B5E7-468310248722}" name="saf_utilities">
+              <FILE id="RMJ3sA" name="saf_utilities.h" compile="0" resource="0" file="../../C/extern/saf/framework/modules/saf_utilities/saf_utilities.h"/>
+              <FILE id="o9VWzO" name="saf_utility_bessel.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_bessel.c"/>
+              <FILE id="bKODBN" name="saf_utility_bessel.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_bessel.h"/>
+              <FILE id="K77zBZ" name="saf_utility_complex.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_complex.c"/>
+              <FILE id="SXwkWy" name="saf_utility_complex.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_complex.h"/>
+              <FILE id="v3ZE4K" name="saf_utility_decor.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_decor.c"/>
+              <FILE id="S8i3Q1" name="saf_utility_decor.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_decor.h"/>
+              <FILE id="aAuQmH" name="saf_utility_fft.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_fft.c"/>
+              <FILE id="hLkE4K" name="saf_utility_fft.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_fft.h"/>
+              <FILE id="Hjfq0e" name="saf_utility_filters.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_filters.c"/>
+              <FILE id="OgB9Kc" name="saf_utility_filters.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_filters.h"/>
+              <FILE id="gviTYW" name="saf_utility_geometry.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_geometry.c"/>
+              <FILE id="ZECQEh" name="saf_utility_geometry.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_geometry.h"/>
+              <FILE id="rMMDKR" name="saf_utility_latticeCoeffs.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_latticeCoeffs.c"/>
+              <FILE id="HTVYUf" name="saf_utility_loudspeaker_presets.c" compile="1"
+                    resource="0" file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_loudspeaker_presets.c"/>
+              <FILE id="skDdJM" name="saf_utility_loudspeaker_presets.h" compile="0"
+                    resource="0" file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_loudspeaker_presets.h"/>
+              <FILE id="Cia0vC" name="saf_utility_matrixConv.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_matrixConv.c"/>
+              <FILE id="u09Tss" name="saf_utility_matrixConv.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_matrixConv.h"/>
+              <FILE id="fBjauO" name="saf_utility_misc.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_misc.c"/>
+              <FILE id="GaizYv" name="saf_utility_misc.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_misc.h"/>
+              <FILE id="njfmNs" name="saf_utility_pitch.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_pitch.c"/>
+              <FILE id="bKoM5H" name="saf_utility_pitch.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_pitch.h"/>
+              <FILE id="bSU41M" name="saf_utility_qmf.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_qmf.c"/>
+              <FILE id="R57xXd" name="saf_utility_qmf.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_qmf.h"/>
+              <FILE id="kvP7Cq" name="saf_utility_sensorarray_presets.c" compile="1"
+                    resource="0" file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_sensorarray_presets.c"/>
+              <FILE id="dUSWyV" name="saf_utility_sensorarray_presets.h" compile="0"
+                    resource="0" file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_sensorarray_presets.h"/>
+              <FILE id="aqwDk1" name="saf_utility_sort.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_sort.c"/>
+              <FILE id="BMSuyw" name="saf_utility_sort.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_sort.h"/>
+              <FILE id="lcTrNz" name="saf_utility_veclib.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_veclib.c"/>
+              <FILE id="SO2jcP" name="saf_utility_veclib.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_utilities/saf_utility_veclib.h"/>
+            </GROUP>
+            <GROUP id="{D392D409-E1EB-DF29-A18A-54461D91FC0E}" name="saf_vbap">
+              <FILE id="ivC3OM" name="saf_vbap.c" compile="1" resource="0" file="../../C/extern/saf/framework/modules/saf_vbap/saf_vbap.c"/>
+              <FILE id="OIvmIM" name="saf_vbap.h" compile="0" resource="0" file="../../C/extern/saf/framework/modules/saf_vbap/saf_vbap.h"/>
+              <FILE id="NsPgq6" name="saf_vbap_internal.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_vbap/saf_vbap_internal.c"/>
+              <FILE id="xCvhEJ" name="saf_vbap_internal.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/modules/saf_vbap/saf_vbap_internal.h"/>
+            </GROUP>
+            <FILE id="CYCeVk" name="CMakeLists.txt" compile="0" resource="1" file="../../C/extern/saf/framework/modules/CMakeLists.txt"/>
+          </GROUP>
+          <GROUP id="{D21A7DE8-A0D5-11F0-402C-2967D74B539B}" name="resources">
+            <GROUP id="{63497E04-E331-9032-9510-9EE13B4D4F74}" name="afSTFT">
+              <FILE id="MmFxYN" name="afSTFT_internal.c" compile="1" resource="0"
+                    file="../../C/extern/saf/framework/resources/afSTFT/afSTFT_internal.c"/>
+              <FILE id="TsOu7V" name="afSTFT_internal.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/resources/afSTFT/afSTFT_internal.h"/>
+              <FILE id="KgM0wG" name="afSTFT_protoFilter.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/resources/afSTFT/afSTFT_protoFilter.h"/>
+              <FILE id="o5aok6" name="afSTFTlib.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/afSTFT/afSTFTlib.c"/>
+              <FILE id="ddXCnZ" name="afSTFTlib.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/afSTFT/afSTFTlib.h"/>
+              <FILE id="Q36EBW" name="LICENSE.txt" compile="0" resource="1" file="../../C/extern/saf/framework/resources/afSTFT/LICENSE.txt"/>
+            </GROUP>
+            <GROUP id="{902D86E1-7CDB-7413-0D95-1E9C4502D4D8}" name="convhull_3d">
+              <FILE id="rMrjoF" name="convhull_3d.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/convhull_3d/convhull_3d.c"/>
+              <FILE id="CnouxJ" name="convhull_3d.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/convhull_3d/convhull_3d.h"/>
+              <FILE id="XQ0XVG" name="LICENSE" compile="0" resource="1" file="../../C/extern/saf/framework/resources/convhull_3d/LICENSE"/>
+            </GROUP>
+            <GROUP id="{0522297F-39D6-04A6-8958-45CDAF1EEFCA}" name="kissFFT">
+              <FILE id="ZlZaOA" name="_kiss_fft_guts.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/resources/kissFFT/_kiss_fft_guts.h"/>
+              <FILE id="LTMxQZ" name="COPYING.txt" compile="0" resource="1" file="../../C/extern/saf/framework/resources/kissFFT/COPYING.txt"/>
+              <FILE id="WLqjgI" name="kiss_fft.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/kissFFT/kiss_fft.c"/>
+              <FILE id="V7atD6" name="kiss_fft.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/kissFFT/kiss_fft.h"/>
+              <FILE id="xE5n1n" name="kiss_fftr.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/kissFFT/kiss_fftr.c"/>
+              <FILE id="Wkxequ" name="kiss_fftr.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/kissFFT/kiss_fftr.h"/>
+            </GROUP>
+            <GROUP id="{42A01E12-C054-2289-B576-277F4BCAAF3E}" name="md_malloc">
+              <FILE id="roR8OR" name="LICENSE" compile="0" resource="1" file="../../C/extern/saf/framework/resources/md_malloc/LICENSE"/>
+              <FILE id="Un26A6" name="md_malloc.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/md_malloc/md_malloc.c"/>
+              <FILE id="G2O4gd" name="md_malloc.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/md_malloc/md_malloc.h"/>
+            </GROUP>
+            <GROUP id="{7A546EDE-64CC-DC37-044A-02DC2D195374}" name="speex_resampler">
+              <FILE id="aqh7GN" name="arch.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/speex_resampler/arch.h"/>
+              <FILE id="winPMS" name="COPYING" compile="0" resource="1" file="../../C/extern/saf/framework/resources/speex_resampler/COPYING"/>
+              <FILE id="OP6ZTj" name="os_support.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/speex_resampler/os_support.h"/>
+              <FILE id="qVEBdo" name="resample.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/speex_resampler/resample.c"/>
+              <FILE id="qK172E" name="resample_neon.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/speex_resampler/resample_neon.h"/>
+              <FILE id="FhHRHA" name="resample_sse.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/speex_resampler/resample_sse.h"/>
+              <FILE id="aVbOwW" name="speex_resampler.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/resources/speex_resampler/speex_resampler.h"/>
+              <FILE id="e0d8zG" name="speexdsp_types.h" compile="0" resource="0"
+                    file="../../C/extern/saf/framework/resources/speex_resampler/speexdsp_types.h"/>
+            </GROUP>
+            <GROUP id="{B9893008-BCC7-AD77-764F-6986B0CDE4D1}" name="zlib">
+              <FILE id="gK4ZYn" name="adler32.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/zlib/adler32.c"/>
+              <FILE id="embY39" name="compress.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/zlib/compress.c"/>
+              <FILE id="w1pzFT" name="crc32.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/zlib/crc32.c"/>
+              <FILE id="lkoZpD" name="crc32.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/zlib/crc32.h"/>
+              <FILE id="nczKbO" name="deflate.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/zlib/deflate.c"/>
+              <FILE id="DGU0MN" name="deflate.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/zlib/deflate.h"/>
+              <FILE id="OBDVax" name="infback.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/zlib/infback.c"/>
+              <FILE id="Qo01P8" name="inffast.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/zlib/inffast.c"/>
+              <FILE id="enCeCL" name="inffast.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/zlib/inffast.h"/>
+              <FILE id="j11TqJ" name="inffixed.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/zlib/inffixed.h"/>
+              <FILE id="pkrt91" name="inflate.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/zlib/inflate.c"/>
+              <FILE id="LK9cBa" name="inflate.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/zlib/inflate.h"/>
+              <FILE id="Px1JMb" name="inftrees.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/zlib/inftrees.c"/>
+              <FILE id="Gy3Etn" name="inftrees.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/zlib/inftrees.h"/>
+              <FILE id="TCiFW4" name="README" compile="0" resource="1" file="../../C/extern/saf/framework/resources/zlib/README"/>
+              <FILE id="s3zW84" name="trees.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/zlib/trees.c"/>
+              <FILE id="IzdJ3x" name="trees.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/zlib/trees.h"/>
+              <FILE id="MsM9S5" name="uncompr.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/zlib/uncompr.c"/>
+              <FILE id="AZZ1td" name="zconf.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/zlib/zconf.h"/>
+              <FILE id="VPFuCZ" name="zlib.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/zlib/zlib.h"/>
+              <FILE id="r9CXAH" name="zutil.c" compile="1" resource="0" file="../../C/extern/saf/framework/resources/zlib/zutil.c"/>
+              <FILE id="weSBmx" name="zutil.h" compile="0" resource="0" file="../../C/extern/saf/framework/resources/zlib/zutil.h"/>
+            </GROUP>
+            <FILE id="CZcCJs" name="CMakeLists.txt" compile="0" resource="1" file="../../C/extern/saf/framework/resources/CMakeLists.txt"/>
+          </GROUP>
+          <FILE id="QXamMJ" name="CMakeLists.txt" compile="0" resource="1" file="../../C/extern/saf/framework/CMakeLists.txt"/>
+        </GROUP>
+      </GROUP>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <VS2017 targetFolder="make/win64/VisualStudio2017" externalLibraries="saf_mkl_custom_lp64.lib&#10;saf_ipp_custom.lib"
+            extraDefs="SAF_USE_INTEL_MKL_LP64&#10;SAF_USE_INTEL_IPP&#10;SAF_ENABLE_SOFA_READER_MODULE&#10;SAF_ENABLE_HADES_MODULE&#10;&#10;">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="hades_renderer_debug" headerPath="../../../../../C/extern/saf/framework/include&#10;../../../../../C/core/include&#10;../../../../../C/examples/include&#10;../../../../extern/VST2_SDK&#10;C:/Program Files (x86)/Intel/oneAPI/mkl/latest/include&#10;C:/Program Files (x86)/Intel/oneAPI/ipp/latest/include"
+                       libraryPath="../../../../../C/extern/saf/dependencies/Win64/lib"
+                       linkTimeOptimisation="1"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="hades_renderer" headerPath="../../../../../C/extern/saf/framework/include&#10;../../../../../C/core/include&#10;../../../../../C/examples/include&#10;../../../../extern/VST2_SDK&#10;C:/Program Files (x86)/Intel/oneAPI/mkl/latest/include&#10;C:/Program Files (x86)/Intel/oneAPI/ipp/latest/include"
+                       libraryPath="../../../../../C/extern/saf/dependencies/Win64/lib"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_osc" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../extern/JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2017>
+    <XCODE_MAC targetFolder="make/MacOSX/Xcode/" vstFolder="../../../../SDKs/VST3 SDK"
+               vst3Folder="../../../../SDKs/VST3_SDK/" userNotes="/opt/intel/compilers_and_libraries/mac/mkl/lib/libmkl_intel_lp64.a &#10;/opt/intel/compilers_and_libraries/mac/mkl/lib/libmkl_sequential.a &#10;/opt/intel/compilers_and_libraries/mac/mkl/lib/libmkl_core -lpthread -lm -ldl&#10;&#10;&#10; -m64 -I/opt/intel/compilers_and_libraries/mac/mkl/include"
+               extraLinkerFlags="-L/usr/local/lib -lsaf_mkl_custom_lp64 -lsaf_ipp_custom&#10;-Wl,-rpath,/usr/local/lib"
+               extraCompilerFlags="-pedantic&#10;-W &#10;-Wall &#10;-Wextra"
+               extraDefs="SAF_USE_INTEL_MKL_LP64&#10;SAF_USE_INTEL_IPP&#10;SAF_ENABLE_SOFA_READER_MODULE&#10;SAF_ENABLE_HADES_MODULE"
+               xcodeValidArchs="i386,x86_64">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="hades_renderer"
+                       binaryPath="" headerPath="../../../../../C/extern/saf/framework/include&#10;../../../../../C/core/include&#10;../../../../../C/examples/include&#10;../../../../extern/VST2_SDK&#10;/opt/intel/oneapi/mkl/latest/include&#10;/opt/intel/oneapi/ipp/latest/include&#10;"
+                       osxArchitecture="64BitIntel" osxCompatibility="10.10 SDK" enablePluginBinaryCopyStep="1"
+                       linkTimeOptimisation="1" userNotes="/opt/intel/compilers_and_libraries/mac/mkl/include"
+                       macOSDeploymentTarget="10.10"/>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="hades_renderer_debug"
+                       binaryPath="" headerPath="../../../../../C/extern/saf/framework/include&#10;../../../../../C/core/include&#10;../../../../../C/examples/include&#10;../../../../extern/VST2_SDK&#10;/opt/intel/oneapi/mkl/latest/include&#10;/opt/intel/oneapi/ipp/latest/include&#10;"
+                       osxArchitecture="64BitIntel" osxCompatibility="10.10 SDK" enablePluginBinaryCopyStep="1"
+                       macOSDeploymentTarget="10.10"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_opengl" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_osc" path="../extern/JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <LINUX_MAKE targetFolder="make/LinuxMakefile" extraLinkerFlags="-L/usr/local/lib -lsaf_mkl_custom_lp64 -lsaf_ipp_custom&#10;-Wl,-rpath,/usr/local/lib"
+                extraCompilerFlags="-pedantic" extraDefs="SAF_USE_INTEL_MKL_LP64&#10;SAF_USE_INTEL_IPP&#10;SAF_ENABLE_SOFA_READER_MODULE&#10;SAF_ENABLE_HADES_MODULE">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="hades_renderer_debug" headerPath="../../../../C/extern/saf/framework/include&#10;../../../../C/core/include&#10;../../../../C/examples/include &#10;../../../extern/VST2_SDK&#10;/opt/intel/oneapi/mkl/latest/include&#10;/opt/intel/oneapi/ipp/latest/include"
+                       linkTimeOptimisation="1"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="hades_renderer" headerPath="../../../../C/extern/saf/framework/include&#10;../../../../C/core/include&#10;../../../../C/examples/include &#10;../../../extern/VST2_SDK&#10;/opt/intel/oneapi/mkl/latest/include&#10;/opt/intel/oneapi/ipp/latest/include"
+                       linkTimeOptimisation="1"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_osc" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../extern/JUCE/modules"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
+    <LINUX_MAKE targetFolder="make/LinuxMakefileRaspberryPI" extraDefs="SAF_USE_OPEN_BLAS_AND_LAPACKE&#10;SAF_ENABLE_SOFA_READER_MODULE&#10;SAF_ENABLE_HADES_MODULE"
+                extraLinkerFlags="-L/usr/lib/arm-linux-gnueabihf -lopenblas -llapacke">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" headerPath="../../../../C/extern/saf/framework/include&#10;../../../../C/core/include&#10;../../../../C/examples/include &#10;../../../extern/VST2_SDK&#10;/usr/include&#10;/usr/include/arm-linux-gnueabihf&#10;"
+                       targetName="hades_renderer_debug"/>
+        <CONFIGURATION isDebug="0" name="Release" headerPath="../../../../C/extern/saf/framework/include&#10;../../../../C/core/include&#10;../../../../C/examples/include &#10;../../../extern/VST2_SDK&#10;/usr/include&#10;/usr/include/arm-linux-gnueabihf&#10;"
+                       targetName="hades_renderer"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_osc" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_opengl" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../extern/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../extern/JUCE/modules"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULES id="juce_audio_basics" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_audio_devices" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_audio_formats" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_audio_processors" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_core" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_cryptography" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_data_structures" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_events" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_graphics" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_gui_basics" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_gui_extra" showAllCode="1" useLocalCopy="0"/>
+    <MODULES id="juce_opengl" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_osc" showAllCode="1" useLocalCopy="0"/>
+  </MODULES>
+  <JUCEOPTIONS JUCE_QUICKTIME="disabled" JUCE_USE_CAMERA="disabled" JUCE_DSP_USE_INTEL_MKL="1"
+               JUCE_WEB_BROWSER="0"/>
+  <LIVE_SETTINGS>
+    <WINDOWS/>
+    <OSX/>
+    <LINUX/>
+  </LIVE_SETTINGS>
+</JUCERPROJECT>

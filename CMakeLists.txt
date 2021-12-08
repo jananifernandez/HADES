@@ -39,9 +39,16 @@ option(JUCE_BUILD_EXAMPLES "Build JUCE Examples" OFF)
 option(SAF_BUILD_TESTS    "Build SAF unit tests." OFF)
 option(SAF_BUILD_EXAMPLES "Build SAF examples."   OFF)
 
+# Enabled SAF sofa reader and HADES modules
+option(SAF_ENABLE_SOFA_READER_MODULE "Enable SOFA reader SAF module."  ON)
+option(SAF_ENABLE_HADES_MODULE       "Enable HADES SAF module."        ON)
+
 # Add JUCE, Spatial_Audio_Framework, and VST2_SDK to the project
 add_subdirectory(SDKs) 
 juce_set_vst2_sdk_path(${CMAKE_CURRENT_SOURCE_DIR}/SDKs/VST2_SDK)
+
+# Add HADES libraries
+add_subdirectory(libs)
 
 # Configure HADES plugins
 add_subdirectory(audio_plugins)
