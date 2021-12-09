@@ -194,11 +194,12 @@ void hades_renderer_initCodec
         case HADES_RENDERER_BEAMFORMER_BMVDR: beamOpt = HADES_BEAMFORMER_BMVDR; break;
     }
 
-    pData->refsensor_idx[0] = 1;
-    pData->refsensor_idx[1] = 5;
+//    pData->refsensor_idx[0] = 1;
+//    pData->refsensor_idx[1] = 5;
+//    "/Users/mccorml1/Documents/git/JanProjects/matlab/h_array/h_array_horiz1deg_357.sofa"
 
     /* Load SOFA file */
-    error = saf_sofa_open(&sofa, "/Users/mccorml1/Documents/git/JanProjects/matlab/h_array/h_array_horiz1deg_357.sofa" );//pData->sofa_filepath_MAIR);
+    error = saf_sofa_open(&sofa, pData->sofa_filepath_MAIR);
     if(error==SAF_SOFA_OK){
         pData->nDirs = sofa.nSources;
         pData->nMics = sofa.nReceivers;

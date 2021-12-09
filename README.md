@@ -1,6 +1,8 @@
 # HADES
 
-Processing for Hearing Assistive Devices (HADES). Developed using [JUCE](https://github.com/WeAreROLI/JUCE/) and the [Spatial_Audio_Framework](https://github.com/leomccormack/Spatial_Audio_Framework).
+Binaural rendering solutions for Hearing-Assistive/Augmented-reality Devices (HADES). Developed using [JUCE](https://github.com/WeAreROLI/JUCE/) and the [Spatial_Audio_Framework](https://github.com/leomccormack/Spatial_Audio_Framework).
+
+![](HADES_Renderer_GUI.png)
 
 ## Plug-in descriptions
 
@@ -9,7 +11,7 @@ This repository contains the following VST plug-ins:
 
 ## Pre-built plug-ins
 
-[The plug-ins are included in the SPARTA installer, which can be downloaded from [here](https://github.com/leomccormack/SPARTA/releases/latest).
+The plug-ins are included in the SPARTA installer, which can be downloaded from [here](https://github.com/leomccormack/SPARTA/releases/latest).
 
 ## Building the plug-ins yourself
 
