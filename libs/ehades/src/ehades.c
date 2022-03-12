@@ -199,7 +199,7 @@ void hades_renderer_initCodec
 //    "/Users/mccorml1/Documents/git/JanProjects/matlab/h_array/h_array_horiz1deg_357.sofa"
 
     /* Load SOFA file */
-    error = saf_sofa_open(&sofa, pData->sofa_filepath_MAIR);
+    error = saf_sofa_open(&sofa, pData->sofa_filepath_MAIR, SAF_SOFA_READER_OPTION_DEFAULT);
     if(error==SAF_SOFA_OK){
         pData->nDirs = sofa.nSources;
         pData->nMics = sofa.nReceivers;
@@ -239,7 +239,7 @@ void hades_renderer_initCodec
         strcpy(pData->progressBarText,"Intialising Synthesis");
         pData->progressBar0_1 = 0.8f;
         saf_sofa_close(&sofa); /* Close previous */
-        error = saf_sofa_open(&sofa, "/Users/mccorml1/Documents/HRIRs_SOFA/D2_48K_24bit_256tap_FIR_SOFA_KEMAR.sofa"); //pData->useDefaultHRIRsFLAG ? NULL : pData->sofa_filepath_HRIR, //);
+        error = saf_sofa_open(&sofa, "/Users/mccorml1/Documents/HRIRs_SOFA/D2_48K_24bit_256tap_FIR_SOFA_KEMAR.sofa", SAF_SOFA_READER_OPTION_DEFAULT); //pData->useDefaultHRIRsFLAG ? NULL : pData->sofa_filepath_HRIR, //);
         if(error==SAF_SOFA_OK){
             pData->binConfig.nHRIR = sofa.nSources;
             pData->binConfig.hrir_fs = sofa.DataSamplingRate;
