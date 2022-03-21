@@ -72,6 +72,10 @@ void hades_renderer_create
     pData->progressBar0_1 = 0.0f;
     pData->progressBarText = malloc1d(HADES_PROGRESSBARTEXT_CHAR_LENGTH*sizeof(char));
     strcpy(pData->progressBarText,"");
+
+    /* Default IR data */
+    pData->nMics = pData->nDirs = pData->IRlength = 0;
+    pData->IR_fs = 0.0f;
     
     /* flags */
     pData->MAIR_SOFA_isLoadedFLAG = 0;
@@ -194,10 +198,6 @@ void hades_renderer_initCodec
         case HADES_RENDERER_BEAMFORMER_BMVDR: beamOpt = HADES_BEAMFORMER_BMVDR; break;
     }
 
-//    pData->refsensor_idx[0] = 1;
-//    pData->refsensor_idx[1] = 5;
-//    "/Users/mccorml1/Documents/git/JanProjects/matlab/h_array/h_array_horiz1deg_357.sofa"
-
     /* Load SOFA file */
     error = saf_sofa_open(&sofa, pData->sofa_filepath_MAIR, SAF_SOFA_READER_OPTION_DEFAULT);
     if(error==SAF_SOFA_OK){
@@ -239,7 +239,7 @@ void hades_renderer_initCodec
         strcpy(pData->progressBarText,"Intialising Synthesis");
         pData->progressBar0_1 = 0.8f;
         saf_sofa_close(&sofa); /* Close previous */
-        error = saf_sofa_open(&sofa, "/Users/mccorml1/Documents/HRIRs_SOFA/D2_48K_24bit_256tap_FIR_SOFA_KEMAR.sofa", SAF_SOFA_READER_OPTION_DEFAULT); //pData->useDefaultHRIRsFLAG ? NULL : pData->sofa_filepath_HRIR, //);
+        error = saf_sofa_open(&sofa, pData->sofa_filepath_HRIR, SAF_SOFA_READER_OPTION_DEFAULT);
         if(error==SAF_SOFA_OK){
             pData->binConfig.nHRIR = sofa.nSources;
             pData->binConfig.hrir_fs = sofa.DataSamplingRate;
@@ -529,13 +529,13 @@ int hades_renderer_getEnableCovMatching(void* const hHdR)
 float hades_renderer_getAnalysisAveraging(void* const hHdR)
 {
     hades_renderer_data *pData = (hades_renderer_data*)(hHdR);
-    return *hades_analysis_getCovarianceAvagingCoeffPtr(pData->hAna);
+    return pData->hAna==NULL ? 0.5f : *hades_analysis_getCovarianceAvagingCoeffPtr(pData->hAna);
 }
 
 float hades_renderer_getSynthesisAveraging(void* const hHdR)
 {
     hades_renderer_data *pData = (hades_renderer_data*)(hHdR);
-    return *hades_synthesis_getSynthesisAveragingCoeffPtr(pData->hSyn);
+    return pData->hSyn==NULL ? 0.5f : *hades_synthesis_getSynthesisAveragingCoeffPtr(pData->hSyn);
 }
 
 int hades_renderer_getReferenceSensorIndex(void* const hHdR, int leftOrRight)
