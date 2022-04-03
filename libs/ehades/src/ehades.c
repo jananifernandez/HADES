@@ -397,18 +397,24 @@ void hades_renderer_setEnableCovMatching(void* const hHdR, int newState)
 void hades_renderer_setAnalysisAveraging(void* const hHdR, float newValue)
 {
     hades_renderer_data *pData = (hades_renderer_data*)(hHdR);
+    if(pData->hAna==NULL)
+        return;
     *hades_analysis_getCovarianceAvagingCoeffPtr(pData->hAna) = newValue;
 }
 
 void hades_renderer_setSynthesisAveraging(void* const hHdR, float newValue)
 {
     hades_renderer_data *pData = (hades_renderer_data*)(hHdR);
+    if(pData->hSyn==NULL)
+        return;
     *hades_synthesis_getSynthesisAveragingCoeffPtr(pData->hSyn) = newValue;
 }
 
 void hades_renderer_setReferenceSensorIndex(void* const hHdR, int leftOrRight, int newIndex)
 {
     hades_renderer_data *pData = (hades_renderer_data*)(hHdR);
+    if (pData->nMics==0)
+        return;
     saf_assert(leftOrRight==0 || leftOrRight==1, "Must be 0 or 1");
     saf_assert(newIndex < pData->nMics, "Index must not exceed the number of mics");
     if(newIndex!=pData->refsensor_idx[leftOrRight]){

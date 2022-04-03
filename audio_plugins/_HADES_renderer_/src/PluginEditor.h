@@ -90,8 +90,10 @@ private:
     std::unique_ptr<EditWindow360> dirGainEditor;
 
     /* openGL */
+#ifndef PLUGIN_EDITOR_DISABLE_OPENGL
     std::unique_ptr<OpenGLGraphicsContextCustomShader> shader;
     OpenGLContext openGLContext;
+#endif
 
     /* sofa file loading */
     FilenameComponent fileChooserMAIR, fileChooserHRIR;
