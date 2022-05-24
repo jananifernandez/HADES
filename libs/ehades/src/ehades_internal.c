@@ -19,6 +19,13 @@
  * @file ehades_internal.c
  * @brief Using HADES to go from microphone array direct to binaural with some
  *        optional enhancement processing inbetween the analysis and synthesis
+ *
+ * @see [1] Fernandez, J., McCormack, L., Hyvärinen, P., Politis, A., and
+ *          Pulkki, V. 2022. “Enhancing binaural rendering of head-worn
+ *          microphone arrays through the use of adaptive spatial covariance
+ *          matching”, The Journal of the Acoustical Society of America 151,
+ *          2624-2635
+ *
  * @author Janani Fernandez & Leo McCormack
  * @date 09.04.2021
  * @license GNU GPLv2

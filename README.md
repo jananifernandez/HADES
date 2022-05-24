@@ -1,8 +1,10 @@
 # HADES
 
-Binaural rendering solutions for Hearing-Assistive/Augmented-reality Devices (HADES). Developed using [JUCE](https://github.com/WeAreROLI/JUCE/) and the [Spatial_Audio_Framework](https://github.com/leomccormack/Spatial_Audio_Framework).
+Binaural rendering solutions for Hearing-Assistive/Augmented-reality Devices (HADES) [1]. Developed using [JUCE](https://github.com/WeAreROLI/JUCE/) and the [Spatial_Audio_Framework](https://github.com/leomccormack/Spatial_Audio_Framework).
 
 ![](HADES_Renderer_GUI.png)
+
+* [1] Fernandez, J., McCormack, L., Hyvärinen, P., Politis, A., and Pulkki V. 2022. [**Enhancing binaural rendering of head-worn microphone arrays through the use of adaptive spatial covariance matching**](https://github.com/jananifernandez/HADES/blob/master/docs/fernandez2022enhancing.pdf), The Journal of the Acoustical Society of America 151(4), 2624-2635
 
 ## Plug-in descriptions
 

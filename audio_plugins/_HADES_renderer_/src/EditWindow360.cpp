@@ -24,6 +24,11 @@
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
+
+#ifndef M_PI
+  #define M_PI 3.14159265358979323846
+#endif
+
 const float circleWidth = 284.0f;
 const float circleRadius = circleWidth / 2.0f;
 const float view_x = 50;
