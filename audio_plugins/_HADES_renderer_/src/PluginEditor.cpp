@@ -376,9 +376,11 @@ PluginEditor::PluginEditor (PluginProcessor* ownerFilter)
     pluginDescription->setBounds (0, 0, 200, 32);
     pluginDescription->setAlpha(0.0f);
     pluginDescription->setEnabled(false);
-//    pluginDescription->setTooltip(TRANS("Coding and Multidirectional Parameterisation of Ambisonic Sound Scenes (COMPASS) is a framework for parametric spatial audio processing of sound scenes captured in the Ambisonics format. Contrary to the time-invariant linear processing of Ambisonics, COMPASS assumes a sound-field model and estimates spatial parameters to describe the Ambisonics recording over time and frequency. These spatial parameters are then used to render the sound scene flexibly to the target playback system; largely mitigating the constraints of lower-order Ambisonics. The use of spatial parameters to describe the sound scene also allows flexible manipulation of the its content, in ways that are not possible with traditional Ambisonics processing; such as rebalancing the direct and diffuse balance.\n\n") +
-//                                  TRANS("The \"Diffuse-to-Direct\" control allows the user to give more prominence to the direct sound components (an effect similar to de-reverberation), or to the ambient component (an effect similar to emphasising reverberation in the recording). When set in the middle, the two are balanced. \n\n ") +
-//                                  TRANS("Note that parametric reproduction is technically \"perfect\"... so long as the input sound scene conforms to the assumed sound-field model. The COMPASS sound-field model has been selected and tuned to reflect most typical sound scenes. However, for complex sound scenes at lower orders, (and especially with the balance slider(s) set to fully direct or diffuse), these assumptions can easily be violated; thus, resulting in audible artefacts. In these cases, the \"Linear to Parametric\" balance slider(s) may be adjusted to lean more towards spatial sharpness with audible artefacts (parametric), or higher signal fidelity with less spatial sharpness (linear)."));
+//    pluginDescription->setTooltip(TRANS(""));
+    addAndMakeVisible (publicationLink);
+    publicationLink.setColour (HyperlinkButton::textColourId, Colours::lightblue);
+    publicationLink.setBounds(getBounds().getWidth()-80, 4, 80, 12);
+    publicationLink.setJustificationType(Justification::centredLeft);
 
     /* Specify screen refresh rate */
     startTimer(TIMER_GUI_RELATED, 60);
