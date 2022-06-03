@@ -1,21 +1,27 @@
 # HADES
 
-Binaural rendering solutions for Hearing-Assistive/Augmented-reality Devices (HADES) [1]. Developed using [JUCE](https://github.com/WeAreROLI/JUCE/) and the [Spatial_Audio_Framework](https://github.com/leomccormack/Spatial_Audio_Framework).
+Binaural rendering solutions for Hearing-Assistive/Augmented-reality Devices (HADES) is an open-source repository of both MATLAB and C implementations of the proposed and tested algorithms described in: 
+*  Fernandez, J., McCormack, L., Hyvärinen, P., Politis, A., and Pulkki V. 2022. [**Enhancing binaural rendering of head-worn microphone arrays through the use of adaptive spatial covariance matching**](https://github.com/jananifernandez/HADES/blob/master/docs/fernandez2022enhancing.pdf), The Journal of the Acoustical Society of America 151(4), 2624-2635
+
+## MATLAB code
+
+The MATLAB code may be found in the [matlab](matlab) folder. 
+
+## C code
+
+The algorithms have also been implemented in C using the [Spatial_Audio_Framework](https://github.com/leomccormack/Spatial_Audio_Framework).
+
+## VST audio plug-in
+
+The C code has also been wrapped into a VST audio plug-in using the [JUCE](https://github.com/WeAreROLI/JUCE/) framework:
 
 ![](HADES_Renderer_GUI.png)
 
-* [1] Fernandez, J., McCormack, L., Hyvärinen, P., Politis, A., and Pulkki V. 2022. [**Enhancing binaural rendering of head-worn microphone arrays through the use of adaptive spatial covariance matching**](https://github.com/jananifernandez/HADES/blob/master/docs/fernandez2022enhancing.pdf), The Journal of the Acoustical Society of America 151(4), 2624-2635
+### Pre-built plug-in
 
-## Plug-in descriptions
+The **hades_renderer.vst** plug-in is included in the SPARTA installer, which can be downloaded from [here](https://github.com/leomccormack/SPARTA/releases/latest).
 
-This repository contains the following VST plug-ins:
-* **hades_renderer** - A flexible wearable microphone array to binaural renderer.
-
-## Pre-built plug-ins
-
-The plug-ins are included in the SPARTA installer, which can be downloaded from [here](https://github.com/leomccormack/SPARTA/releases/latest).
-
-## Building the plug-ins yourself
+### Building the plug-in yourself
 
 First clone the repository (including submodules) with:
 
@@ -25,7 +31,7 @@ git clone --recursive https://github.com/jananifernandez/HADES
 git submodule update --init --recursive
 ```
 
-## Prerequisites 
+### Prerequisites 
 
 The [VST2_SDK](https://web.archive.org/web/20181016150224/https://download.steinberg.net/sdk_downloads/vstsdk3610_11_06_2018_build_37.zip) should be placed in the 'SDKs' folder like so:
 ```
@@ -44,9 +50,9 @@ Note, however, that alternative performance libraries may also be used, with mor
 sudo apt-get install x11proto-xinerama-dev libwebkit2gtk-4.0-dev libgtk-3-dev x11proto-xext-dev libcurl4-openssl-dev libasound2-dev
 ```
 
-## Building the plug-ins via CMake 
+### Building the plug-in via CMake 
 
-The plug-ins may be built with CMake (version 3.15 or higher):
+The plug-in may be built with CMake (version 3.15 or higher):
  ```
  mkdir build
  cmake -S . -B build -DSAF_ENABLE_SOFA_READER_MODULE=1 -DSAF_ENABLE_HADES_MODULE=1
