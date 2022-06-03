@@ -15,6 +15,7 @@ lib/
 cmake-build-debug/
 cmake-build-release/
 *.asv
+recordings/
 
 # User-specific files
 *.suo

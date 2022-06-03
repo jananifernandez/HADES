@@ -41,41 +41,37 @@ switch configuration
         % do nothing
 end
 
-% for creating the binaural reference
-%sofa = loadSofaFile('/Users/mccorml1/Documents/HRIRs_SOFA/KemarAuralID.sofa');
-sofa = loadSofaFile('/Users/fernanj2/Documents/HRIRs_SOFA/D2_48K_24bit_256tap_FIR_SOFA_KEMAR.sofa');
-h_ref = sofa.IR;
-ref_dirs_deg = sofa.SourcePosition(1:2,:).';
-ref_dirs_rad = ref_dirs_deg * pi/180;
-ind = findClosestGridPoints(unitSph2cart(ref_dirs_rad), unitSph2cart(grid_dirs_rad));
-h_ref = h_ref(:,:,ind);
-%h_ref = convertHRTF2MinPhaseAllpass(h_ref); disp('test whether this is helping or not...')
-ref_dirs_deg = ref_dirs_deg(ind,:);
-ref_dirs_rad = ref_dirs_rad(ind,:);
+% For creating the binaural reference
+% This is a subset of the D2_48K_24bit_256tap_FIR_SOFA_KEMAR.sofa HRIRs
+% from the SADIE 2 database, keeping only the 360 directions on the
+% horizontal:
+load('resources_/hrirs')
+ind = findClosestGridPoints(hrir_dirs_rad, grid_dirs_rad);
+h_ref = hrirs(:,:,ind); 
+ref_dirs_deg = hrir_dirs_rad(ind,:)*180/pi;
+ref_dirs_rad = hrir_dirs_rad(ind,:);
  
+
 %% MAIN LOOP 
 rec_path = 'recordings';
 if ~exist(rec_path, 'dir'), mkdir(rec_path); end
 
 rir_name = [file_name '_' roomType '_' num2str(srcIndices) ];
-rec_name = [rir_name '_' srcAudioOption '_' configuration]; 
-ref_name = ['reference_' roomType '_' num2str(srcIndices) '_' srcAudioOption]; 
+rec_name = [rir_name '_' configuration]; 
+ref_name = ['reference_' roomType '_' num2str(srcIndices)]; 
 
 % Create recording 
 switch roomType
     case 'anechoic'
         room = [5 5 5];
         rt60 = 0.1; 
-    case 'medium'
-       % src_sigs = randn(fs,nSrc);
+    case 'medium' 
         room = [10 7 4];
         rt60 = 0.5;    
-    case 'medium2'
-       % src_sigs = randn(fs,nSrc);
+    case 'medium2' 
         room = [20 14 8];
         rt60 = 0.9; 
-    case 'high'
-       % src_sigs = randn(fs,nSrc);
+    case 'high' 
         room = [10 7 4];
         rt60 = 2; 
 end 
