@@ -14,6 +14,7 @@ lib/
 .idea/
 cmake-build-debug/
 cmake-build-release/
+*.asv
 
 # User-specific files
 *.suo
