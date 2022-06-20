@@ -150,7 +150,6 @@ x = 0.99.*x./max(abs(x(:)));
 
 audiowrite([rec_path filesep rec_name '.wav'], x,  fs, 'BitsPerSample', 32); 
 audiowrite([rec_path filesep ref_name '.wav'], ref, fs, 'BitsPerSample', 32);
-audiowrite(['output' filesep ref_name '.wav'], ref, fs, 'BitsPerSample', 32);
  
 
 
