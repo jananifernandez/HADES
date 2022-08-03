@@ -1,4 +1,14 @@
-clear all,  dbstop if error %#ok close all,
+clear all, close all, dbstop if error %#ok 
+
+% Change this path to where the external libraries are
+externals_path = '../../resources_/';
+
+% This script requires the following external libraries
+% Obtain from: https://github.com/polarch/Spherical-Harmonic-Transform
+addpath([externals_path 'Spherical-Harmonic-Transform'])
+% Obtain from: https://github.com/polarch/shoebox-roomsim
+addpath([externals_path 'shoebox-roomsim'])
+addpath('./utils')
 
 % Src Indices
  

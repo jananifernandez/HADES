@@ -4,11 +4,25 @@ clear all, dbstop if error%, close all %#ok
 % and a diffuse component per time-frequency tile. The balance between them
 % is dictated via diffuseness parameter estimates
 
+% Make sure to first run "CREATE_SIMULATED_ARRAY_RECORDINGS.m" before
+% running this script!
+
+% Change this path to where the external libraries are
+externals_path = '../../resources_/';
+
+% This script requires the following external libraries
+% Obtain from: https://github.com/polarch/Spherical-Harmonic-Transform
+addpath([externals_path 'Spherical-Harmonic-Transform'])
+% Obtain from: https://github.com/jvilkamo/afSTFT
+addpath([externals_path 'afSTFT'])
+
 addpath('./resources_/')
 addpath('./utils/')
-addpath('./simulate_recording/') 
+addpath('./recordings/') 
 
 ENABLE_PLOTS = 1;
+
+if ~exist('renders','dir'), mkdir('renders'); end
 
 %% STEP 1: Prep work
 % Global parameters:
@@ -18,7 +32,7 @@ ENABLE_PLOTS = 1;
 %   mic_inds:      indices into h_array(:,mic_inds,:) corresponding to all left+right device sensors 
 %   ref_inds:      indices into h_array(:,mic_inds(ref_inds),:) corresponding to the left+right reference sensors
 %
-load('resources/h_array.mat')
+load('h_array.mat')
 grid_dirs_deg = grid_dirs_rad*180/pi;
 fs = 48e3;  
 configuration = '4+4'; % 
@@ -48,10 +62,9 @@ switch configuration
 end
 
 
-%% STEP 2: Simulate a recording (using the measurements) OR load a real recording
-scene_name = 'speech_example';
-[insig, wav_fs] = audioread(['resources_/' scene_name '.wav']);
-insig = insig(1:fs*3,:); % Just take a couple of seconds
+%% STEP 2: load simulated recording, or load a real recording using the array
+scene_name = 'h_array.mat_medium_8  2_4+4';
+[insig, wav_fs] = audioread([scene_name '.wav']); 
 
 
 %% STEP 3: Configure and Apply HADES Analysis 
@@ -79,7 +92,6 @@ analysis_pars.DOA_ESTIMATOR = 'MUSIC';
 analysis_pars.DIFFUSENESS_ESTIMATOR = 'SDDIFF';
 analysis_pars.FREQUENCY_AVERAGING_OPTION = 'none';
 analysis_pars.temporal_avg_coeff = 1 - 1/(4096/analysis_pars.blocksize);% 0.97; % 512: 0.77, 256: 0.92
-if USE_ORACLE==1, analysis_pars.oracle_data = oracle_data; else, analysis_pars.oracle_data = []; end %#ok 
 
 %%% Initialise HADES Analysis
 analysis_pars = hades_analysis_init(analysis_pars); 
@@ -133,15 +145,15 @@ end
 %     preservation for binaural hearing aids. IEEE/ACM Transactions on 
 %     Audio, Speech, and Language Processing, 27(10), pp.1549-1563.
 %
-sofa_file = loadSofaFile('/Users/mccorml1/Documents/HRIRs_SOFA/D2_48K_24bit_256tap_FIR_SOFA_KEMAR.sofa');
-%sofa_file = loadSofaFile('~/Documents/git/resources_/D2_48K_24bit_256tap_FIR_SOFA_KEMAR.sofa');
-synthesis_pars.ENABLE_COVARIANCE_MATCHING = 0;
-synthesis_pars.SOURCE_BEAMFORMING_OPTION = 'BMVDR';
-hrirs = sofa_file.IR; 
-hrir_dirs_deg = sofa_file.SourcePosition(1:2,:).';
-ind = findClosestGridPoints(hrir_dirs_deg*pi/180, analysis_pars.grid_dirs_deg*pi/180);  
-synthesis_pars.hrirs = hrirs(:,:,ind); 
-synthesis_pars.hrir_fs = sofa_file.IR_fs;
+load('hrirs.mat')
+
+synthesis_pars.ENABLE_COVARIANCE_MATCHING = 1;
+synthesis_pars.SOURCE_BEAMFORMING_OPTION = 'none';
+% hrirs = sofa_file.IR; 
+% hrir_dirs_deg = sofa_file.SourcePosition(1:2,:).';
+% ind = findClosestGridPoints(hrir_dirs_deg*pi/180, analysis_pars.grid_dirs_deg*pi/180);  
+synthesis_pars.hrirs = hrirs; 
+synthesis_pars.hrir_fs = h_array_fs;
 synthesis_pars.ref_inds = ref_inds;
 synthesis_pars.temporal_avg_coeff = analysis_pars.temporal_avg_coeff;  
 
@@ -151,7 +163,7 @@ synthesis_pars = hades_synthesis_init(analysis_pars, synthesis_pars);
 % Apply HADES Synthesis   
 %  signal_container:    obtained using 'hades_analysis()' 
 %  parameter_container: obtained using 'hades_analysis()' 
-[outsig, parameter_container_out] = hades_synthesis(synthesis_pars, signal_container, parameter_container);
+outsig = hades_synthesis(synthesis_pars, signal_container, parameter_container);
 outsig = 0.99.*outsig./max(abs(outsig(:)));
-audiowrite(['../output/' scene_name '_' synthesis_pars.SOURCE_BEAMFORMING_OPTION '_' ...
+audiowrite(['renders/' scene_name '_' synthesis_pars.SOURCE_BEAMFORMING_OPTION '_' ...
     num2str(synthesis_pars.ENABLE_COVARIANCE_MATCHING ) '.wav'], outsig, fs, 'BitsPerSample', 32);

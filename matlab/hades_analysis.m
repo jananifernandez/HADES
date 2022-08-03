@@ -1,4 +1,20 @@
 function [signal_container, parameter_container] = hades_analysis(insig, pars)
+%
+% This file is part of HADES
+% Copyright (c) 2021 - Janani Fernandez & Leo McCormack
+%
+% HADES is free software; you can redistribute it and/or modify it under the
+% terms of the GNU General Public License as published by the Free Software
+% Foundation; either version 2 of the License, or (at your option) any later
+% version.
+%
+% HADES is distributed in the hope that it will be useful, but WITHOUT ANY
+% WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+% A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+%
+% See <http://www.gnu.org/licenses/> for a copy of the GNU General Public
+% License.
+%
 
 % Local variables
 applyDiffWhitening = 1; 
@@ -62,41 +78,36 @@ while startIndex+blocksize <= nBlocks*blocksize
     signal_container.Cx_avg(:,:,:,blockIndex) = Cx;
     
     % Loop over bands 
-    if ~isempty(pars.oracle_data)
-        doa_idx(:,1) = pars.oracle_data.src_idx;
-        diffuseness(:,1) = pars.oracle_data.diffuseness;
-    else
-        for band=1:nBands 
-            % Parameter estimation requires first computing the EVD of the input spatial covarince matrix (SCM; Cx)  
-            if applyDiffWhitening==1
-                [U,E] = sorted_eig(pars.DFCmtx(:,:,band));
-                T = sqrt(pinv(E))*U';    
-                [V,S] = sorted_eig(T*Cx(:,:,band)*T');    
-                %[V,~] = sorted_eig(Cx(:,:,band));
-            else
-                [V,S] = sorted_eig(Cx(:,:,band)); 
-            end
+    for band=1:nBands 
+        % Parameter estimation requires first computing the EVD of the input spatial covarince matrix (SCM; Cx)  
+        if applyDiffWhitening==1
+            [U,E] = sorted_eig(pars.DFCmtx(:,:,band));
+            T = sqrt(pinv(E))*U';    
+            [V,S] = sorted_eig(T*Cx(:,:,band)*T');    
+            %[V,~] = sorted_eig(Cx(:,:,band));
+        else
+            [V,S] = sorted_eig(Cx(:,:,band)); 
+        end
 
-            % Estimate the number of sources (if required)
-            switch pars.DIFFUSENESS_ESTIMATOR 
-                case 'SDDIFF' 
-                    % Apply diffuse whitening process and recompute SCM eigenvalues  
-                    lambda = diag(real(S));
-                    diffuseness(band) = shdiff(lambda); 
-                otherwise, assert(0);
-            end
+        % Estimate the number of sources (if required)
+        switch pars.DIFFUSENESS_ESTIMATOR 
+            case 'SDDIFF' 
+                % Apply diffuse whitening process and recompute SCM eigenvalues  
+                lambda = diag(real(S));
+                diffuseness(band) = shdiff(lambda); 
+            otherwise, assert(0);
+        end
 
-            % Source DoA estimation (if required)
-            switch pars.DOA_ESTIMATOR 
-                case 'MUSIC'   
-                    A_grid = reshape(pars.H_grid(band,:,:),[nMics nGrid]); 
-                    if applyDiffWhitening==1
-                        A_grid = T*A_grid;
-                    end
-                    Vn = V(:,2:end);  
-                    [~,doa_idx(band)] = sdMUSIC(grid_dirs_rad, grid_dirs_xyz, A_grid, 1, Vn); 
-                otherwise, assert(0);
-            end
+        % Source DoA estimation (if required)
+        switch pars.DOA_ESTIMATOR 
+            case 'MUSIC'   
+                A_grid = reshape(pars.H_grid(band,:,:),[nMics nGrid]); 
+                if applyDiffWhitening==1
+                    A_grid = T*A_grid;
+                end
+                Vn = V(:,2:end);  
+                [~,doa_idx(band)] = sdMUSIC(grid_dirs_rad, grid_dirs_xyz, A_grid, 1, Vn); 
+            otherwise, assert(0);
         end
     end
     
@@ -154,22 +165,62 @@ for k = 1:nSrc
 end
 end
 
-%%%%%%%%%%%%%%%%%%%%%%%%
-function K = computeSORTE(lambda)
-% Written by Archontis Politis
-N = length(lambda);
-Dlambda = lambda(1:end-1) - lambda(2:end);
-sigma2 = zeros(N-1,1);
-for k=1:N-1 
-    meanDlambda = 1/(N-k)*sum(Dlambda(k:N-1));
-    sigma2(k) = 1/(N-k)*sum( (Dlambda(k:N-1) - meanDlambda).^2 );
-end
-SORTE = zeros(N-2,1);
-for k=1:N-2 
-    if sigma2(k)>0, SORTE(k) = sigma2(k+1)/sigma2(k);
-    elseif sigma2(k) == 0, SORTE(k) = Inf;
-    end
-end
+function psi = shdiff(lambda)
+% SHDIFF Diffueness COMEDIE estimator in the spherical harmonic domain
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% This file is part of the COMPASS reference implementation, as described
+% in the publication
+%
+%   Politis, Archontis, Sakari Tervo, and Ville Pulkki. 2018. 
+%   "COMPASS: Coding and multidirectional parameterization of ambisonic 
+%   sound scenes." 
+%   IEEE Int. Conf. on Acoustics, Speech and Signal Processing (ICASSP).
+%
+% Author:   Archontis Politis (archontis.politis@gmail.com)
+% Copyright (C) 2021 - Archontis Politis
+% 
+% The COMPASS reference code is free software; you can redistribute it 
+% and/or modify it under the terms of the GNU General Public License as 
+% published by the Free Software Foundation; either version 2 of the 
+% License, or (at your option) any later version.
+% 
+% The COMPASS reference code is distributed in the hope that it will be 
+% useful, but WITHOUT ANY WARRANTY; without even the implied warranty of 
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General 
+% Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License along 
+% with this program; if not, see <https://www.gnu.org/licenses/>.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Implementation based on the COMEDIE estimator as described in:
+%   Epain, N. and Jin, C.T., 2016. 
+%   Spherical Harmonic Signal Covariance and Sound Field Diffuseness. 
+%   IEEE/ACM Transactions on Audio, Speech, and Language Processing, 24(10), 
+%   pp.1796-1807.
+%
+% INPUT ARGUMENTS
+%
+% lambda    % vector of eigenvalues of the spatial covariance matrix of
+%             ambisonic signals
+%
+% OUTPUT ARGUMENTS
+%
+% psi       % diffuseness estimate, from 0 to 1
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-[~,K] = min(SORTE(1:end-1));  
+SHorder = sqrt(length(lambda))-1;
+nSH = (SHorder+1)^2;
+if all(lambda==0)
+    psi = 1;
+else
+    g_0 = 2*(nSH-1);
+    mean_ev = sum(lambda)/nSH;
+    g = (1/mean_ev)*sum(abs(lambda-mean_ev));
+    psi = 1-g/g_0;
+end
 end

@@ -1,4 +1,20 @@
 function outsig = hades_synthesis(synthesis_pars, signal_container, parameter_container)
+%
+% This file is part of HADES
+% Copyright (c) 2021 - Janani Fernandez & Leo McCormack
+%
+% HADES is free software; you can redistribute it and/or modify it under the
+% terms of the GNU General Public License as published by the Free Software
+% Foundation; either version 2 of the License, or (at your option) any later
+% version.
+%
+% HADES is distributed in the hope that it will be useful, but WITHOUT ANY
+% WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+% A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+%
+% See <http://www.gnu.org/licenses/> for a copy of the GNU General Public
+% License.
+%
 
 % Local variables 
 hopsize = synthesis_pars.hopsize;
@@ -134,9 +150,6 @@ while blockIndex <= nBlocks
             Q = zeros(2,nMics);
             Q(1,ref_inds(1)) = 1;
             Q(2,ref_inds(2)) = 1;
-            if synthesis_pars.ENABLE_DRC
-                Q = G_diff(band).*Q; 
-            end 
         else
             % Dual-stream prototype:
             Q = (1-diffuseness(band)).*Q_dir + diffuseness(band).*Q_diff;

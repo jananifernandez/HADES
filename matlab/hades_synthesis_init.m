@@ -1,4 +1,21 @@
 function synthesis_pars = hades_synthesis_init(analysis_pars, synthesis_pars)
+%
+% This file is part of HADES
+% Copyright (c) 2021 - Janani Fernandez & Leo McCormack
+%
+% HADES is free software; you can redistribute it and/or modify it under the
+% terms of the GNU General Public License as published by the Free Software
+% Foundation; either version 2 of the License, or (at your option) any later
+% version.
+%
+% HADES is distributed in the hope that it will be useful, but WITHOUT ANY
+% WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+% A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+%
+% See <http://www.gnu.org/licenses/> for a copy of the GNU General Public
+% License.
+%
+
 % Assumes that the hrtfs have been measured (or at least interpolated) to
 % have the same grid as the array grid
 
