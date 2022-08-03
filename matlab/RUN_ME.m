@@ -146,13 +146,9 @@ end
 %     Audio, Speech, and Language Processing, 27(10), pp.1549-1563.
 %
 load('hrirs.mat')
-
 synthesis_pars.ENABLE_COVARIANCE_MATCHING = 1;
-synthesis_pars.SOURCE_BEAMFORMING_OPTION = 'none';
-% hrirs = sofa_file.IR; 
-% hrir_dirs_deg = sofa_file.SourcePosition(1:2,:).';
-% ind = findClosestGridPoints(hrir_dirs_deg*pi/180, analysis_pars.grid_dirs_deg*pi/180);  
-synthesis_pars.hrirs = hrirs; 
+synthesis_pars.SOURCE_BEAMFORMING_OPTION = 'none'; 
+synthesis_pars.hrirs = hrirs(:,:,findClosestGridPoints(hrir_dirs_rad, grid_dirs_rad)); 
 synthesis_pars.hrir_fs = h_array_fs;
 synthesis_pars.ref_inds = ref_inds;
 synthesis_pars.temporal_avg_coeff = analysis_pars.temporal_avg_coeff;  
