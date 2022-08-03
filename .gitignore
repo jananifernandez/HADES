@@ -17,6 +17,7 @@ cmake-build-release/
 *.asv
 recordings/
 *.wav
+*.reapeaks
 
 # User-specific files
 *.suo
