@@ -195,6 +195,11 @@ void PluginProcessor::getStateInformation (MemoryBlock& destData)
     xml.setAttribute("refSensorIndexLEFT", String(hades_renderer_getReferenceSensorIndex(hHdR, 0)));
     xml.setAttribute("refSensorIndexRIGHT", String(hades_renderer_getReferenceSensorIndex(hHdR, 1)));
 
+    //if(!hades_renderer_getSofaFilePathMAIR(hHdR))
+         xml.setAttribute("SofaFilePath_MAIR", String(hades_renderer_getSofaFilePathMAIR(hHdR)));
+    //if(!hades_renderer_getSofaFilePathHRIR(hHdR))
+         xml.setAttribute("SofaFilePath_HRIR", String(hades_renderer_getSofaFilePathHRIR(hHdR)));
+
 	copyXmlToBinary(xml, destData);
 }
 
