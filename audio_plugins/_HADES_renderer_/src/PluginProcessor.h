@@ -27,7 +27,7 @@ enum {
 
 class PluginProcessor  : public AudioProcessor,
                          public MultiTimer, 
-                         public VSTCallbackHandler
+                         public VST2ClientExtensions
 {
 public:
     /* Get functions */
@@ -45,6 +45,7 @@ public:
             return 1;
         return 0;
     }
+    VST2ClientExtensions* getVST2ClientExtensions() override {return this;}
 
 private:
     void* hHdR;             /* compact handle */

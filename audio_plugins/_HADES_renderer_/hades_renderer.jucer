@@ -12,8 +12,8 @@
               userNotes="_CRT_SECURE_NO_WARNINGS&#10;_WINSOCK_DEPRECATED_NO_WARNINGS&#10;"
               buildAUv3="0" pluginIsMidiEffectPlugin="0" displaySplashScreen="0"
               reportAppUsage="0" splashScreenColour="Dark" buildStandalone="0"
-              enableIAA="0" cppLanguageStandard="14" companyCopyright="Aalto"
-              pluginFormats="buildVST" jucerFormatVersion="1">
+              enableIAA="0" companyCopyright="Aalto" pluginFormats="buildVST"
+              jucerFormatVersion="1">
   <MAINGROUP id="imnfnp" name="hades_renderer">
     <FILE id="gZgzcr" name="HADESLookAndFeel.h" compile="0" resource="0"
           file="../resources/HADESLookAndFeel.h"/>

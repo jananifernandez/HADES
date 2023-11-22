@@ -16,7 +16,7 @@ juce_add_plugin(${PROJECT_NAME}
     COPY_PLUGIN_AFTER_BUILD     TRUE    
     PLUGIN_MANUFACTURER_CODE    JANF                
     PLUGIN_CODE                 HADE                     
-    FORMATS                     VST      # ( VST AAX Unity VST3 AU AUv3 Standalone )
+    FORMATS                     ${BUILD_PLUGIN_FORMATS}      # ( VST AAX Unity VST3 AU AUv3 Standalone )
     PRODUCT_NAME                "${PROJECT_NAME}"
 )   
 
