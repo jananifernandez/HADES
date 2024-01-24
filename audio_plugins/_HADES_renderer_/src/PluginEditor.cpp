@@ -1035,24 +1035,24 @@ void PluginEditor::paint (juce::Graphics& g)
             break;
         case k_warning_supported_fs:
             g.drawText(TRANS("Sample rate (") + String(hades_renderer_getDAWsamplerate(hHdR)) + TRANS(") is unsupported"),
-                       getBounds().getWidth()-225, 6, 530, 11,
+                       getBounds().getWidth()-225, 16, 530, 11,
                        Justification::centredLeft, true);
             break;
         case k_warning_mismatch_fs:
             g.drawText(TRANS("Sample rate mismatch between DAW/IRs/HRIRs"),
-                       getBounds().getWidth()-225, 6, 530, 11,
+                       getBounds().getWidth()-225, 16, 530, 11,
                        Justification::centredLeft, true);
             break;
         case k_warning_NinputCH:
             g.drawText(TRANS("Insufficient number of input channels (") + String(hVst->getTotalNumInputChannels()) +
                        TRANS("/") + String(hades_renderer_getNmicsArray(hHdR)) + TRANS(")"),
-                       getBounds().getWidth()-225, 6, 530, 11,
+                       getBounds().getWidth()-225, 16, 530, 11,
                        Justification::centredLeft, true);
             break;
         case k_warning_NoutputCH:
             g.drawText(TRANS("Insufficient number of output channels (") + String(hVst->getTotalNumOutputChannels()) +
                        TRANS("/") + String(2) + TRANS(")"),
-                       getBounds().getWidth()-225, 6, 530, 11,
+                       getBounds().getWidth()-225, 16, 530, 11,
                        Justification::centredLeft, true);
             break;
     }
