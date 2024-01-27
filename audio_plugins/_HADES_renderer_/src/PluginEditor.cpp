@@ -260,12 +260,6 @@ PluginEditor::PluginEditor (PluginProcessor* ownerFilter)
     hVst = ownerFilter;
     hHdR = hVst->getFXHandle();
 
-    /* init OpenGL */
-#ifndef PLUGIN_EDITOR_DISABLE_OPENGL
-    openGLContext.setMultisamplingEnabled(true);
-    openGLContext.attachTo(*this);
-#endif
-
     /* Look and Feel */
     LAF.setDefaultColours();
     setLookAndFeel(&LAF);
@@ -383,7 +377,7 @@ PluginEditor::PluginEditor (PluginProcessor* ownerFilter)
     publicationLink.setJustificationType(Justification::centredLeft);
 
     /* Specify screen refresh rate */
-    startTimer(TIMER_GUI_RELATED, 60);
+    startTimer(TIMER_GUI_RELATED, 120);
 
     currentWarning = k_warning_none;
 
