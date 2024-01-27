@@ -67,7 +67,7 @@ typedef enum {
 /* ========================================================================== */
 
 #ifndef FRAME_SIZE
-# define FRAME_SIZE ( 512 )
+# define FRAME_SIZE ( 1024 )
 #endif
 #define MAX_NUM_SH_SIGNALS ( (MAX_SH_ORDER + 1)*(MAX_SH_ORDER + 1)  )    /* (L+1)^2 */
 #define HOP_SIZE ( 128 )
