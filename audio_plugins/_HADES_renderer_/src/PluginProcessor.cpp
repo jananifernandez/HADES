@@ -2,7 +2,10 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-PluginProcessor::PluginProcessor()
+PluginProcessor::PluginProcessor():
+AudioProcessor(BusesProperties()
+    .withInput("Input", AudioChannelSet::discreteChannels(HADES_MAX_NUM_CHANNELS), true)
+    .withOutput("Output", AudioChannelSet::discreteChannels(2), true))
 {
 	nSampleRate = 48000;
 	hades_renderer_create(&hHdR);
