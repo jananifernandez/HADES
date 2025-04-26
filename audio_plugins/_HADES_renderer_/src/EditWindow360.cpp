@@ -1,29 +1,21 @@
 /*
-  ==============================================================================
-
-  This is an automatically generated GUI class created by the Projucer!
-
-  Be careful when adding custom code to these files, as only the code within
-  the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
-  and re-saved.
-
-  Created with Projucer version: 6.0.8
-
-  ------------------------------------------------------------------------------
-
-  The Projucer is part of the JUCE library.
-  Copyright (c) 2020 - Raw Material Software Limited.
-
-  ==============================================================================
-*/
-
-//[Headers] You can add your own extra header files here...
-//[/Headers]
+ * This file is part of HADES
+ * Copyright (c) 2021 - Janani Fernandez & Leo McCormack
+ *
+ * HADES is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * HADES is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * See <http://www.gnu.org/licenses/> for a copy of the GNU General Public
+ * License.
+ */
 
 #include "EditWindow360.h"
-
-
-//[MiscUserDefs] You can add your own user definitions and misc code here...
 
 #ifndef M_PI
   #define M_PI 3.14159265358979323846
@@ -33,50 +25,25 @@ const float circleWidth = 284.0f;
 const float circleRadius = circleWidth / 2.0f;
 const float view_x = 50;
 const float view_y = 42;
-//[/MiscUserDefs]
 
-//==============================================================================
 EditWindow360::EditWindow360 (float* _pData, float _minVal, float _maxVal, int _dB_flag)
 {
-    //[Constructor_pre] You can add your own custom stuff here..
-    //[/Constructor_pre]
-
-
-    //[UserPreSize]
-    //[/UserPreSize]
-
     setSize (382, 382);
 
-
-    //[Constructor] You can add your own custom stuff here..
     refreshRequired = true;
     pData = _pData;
     minVal = _minVal;
     maxVal = _maxVal;
     gainFLAG = _dB_flag;
-    //[/Constructor]
 }
 
 EditWindow360::~EditWindow360()
 {
-    //[Destructor_pre]. You can add your own custom destruction code here..
-    //[/Destructor_pre]
-
-
-
-    //[Destructor]. You can add your own custom destruction code here..
     setLookAndFeel(nullptr);
-    //[/Destructor]
 }
 
-//==============================================================================
 void EditWindow360::paint (juce::Graphics& g)
 {
-    //[UserPrePaint] Add your own custom painting code here..
-    //[/UserPrePaint]
-
-    //[UserPaint] Add your own custom painting code here..
-
     juce::Colour flareColour = juce::Colour (0x44f4f4f4), transparentColour = juce::Colour (0x00f4f4f4);
     juce::Colour cyanColour = juce::Colour (0xff2a9da5),  cyanFlareColour = juce::Colour (0x102a9da5);
 
@@ -164,31 +131,19 @@ void EditWindow360::paint (juce::Graphics& g)
 
 
     refreshRequired = false;
-    //[/UserPaint]
 }
 
 void EditWindow360::resized()
 {
-    //[UserPreResize] Add your own custom resize code here..
-    //[/UserPreResize]
-
-    //[UserResized] Add your own custom resize handling here..
-
-
 	repaint();
-    //[/UserResized]
 }
 
-void EditWindow360::mouseDown (const juce::MouseEvent& e)
+void EditWindow360::mouseDown (const juce::MouseEvent& /*e*/)
 {
-    //[UserCode_mouseDown] -- Add your code here...
-
-    //[/UserCode_mouseDown]
 }
 
 void EditWindow360::mouseDrag (const juce::MouseEvent& e)
 {
-    //[UserCode_mouseDrag] -- Add your code here...
     Point<float> point;
     float centre_x, centre_y;
     centre_x = view_x+circleRadius;
@@ -205,49 +160,8 @@ void EditWindow360::mouseDrag (const juce::MouseEvent& e)
         pData[i] =  jlimit(minVal, maxVal, r*(maxVal-minVal)/circleRadius + minVal) ;
     }
     refreshRequired = true;
-
-    //[/UserCode_mouseDrag]
 }
 
-void EditWindow360::mouseUp (const juce::MouseEvent& e)
+void EditWindow360::mouseUp (const juce::MouseEvent& /*e*/)
 {
-    //[UserCode_mouseUp] -- Add your code here...
-    //[/UserCode_mouseUp]
 }
-
-
-
-//[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
-
-//[/MiscUserCode]
-
-
-//==============================================================================
-#if 0
-/*  -- Projucer information section --
-
-    This is where the Projucer stores the metadata that describe this GUI layout, so
-    make changes in here at your peril!
-
-BEGIN_JUCER_METADATA
-
-<JUCER_COMPONENT documentType="Component" className="EditWindow360" componentName=""
-                 parentClasses="public Component" constructorParams="float* _pData, float _minVal, float _maxVal, int _dB_flag"
-                 variableInitialisers="" snapPixels="8" snapActive="1" snapShown="1"
-                 overlayOpacity="0.330" fixedSize="1" initialWidth="382" initialHeight="382">
-  <METHODS>
-    <METHOD name="mouseDown (const juce::MouseEvent&amp; e)"/>
-    <METHOD name="mouseDrag (const juce::MouseEvent&amp; e)"/>
-    <METHOD name="mouseUp (const juce::MouseEvent&amp; e)"/>
-  </METHODS>
-  <BACKGROUND backgroundColour="0"/>
-</JUCER_COMPONENT>
-
-END_JUCER_METADATA
-*/
-#endif
-
-
-//[EndFile] You can add extra defines here...
-//[/EndFile]
-

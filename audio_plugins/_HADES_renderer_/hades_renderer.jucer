@@ -304,20 +304,19 @@
     </VS2017>
     <XCODE_MAC targetFolder="make/MacOSX/Xcode/" vstFolder="../../../../SDKs/VST3 SDK"
                vst3Folder="../../../../SDKs/VST3_SDK/" userNotes="/opt/intel/compilers_and_libraries/mac/mkl/lib/libmkl_intel_lp64.a &#10;/opt/intel/compilers_and_libraries/mac/mkl/lib/libmkl_sequential.a &#10;/opt/intel/compilers_and_libraries/mac/mkl/lib/libmkl_core -lpthread -lm -ldl&#10;&#10;&#10; -m64 -I/opt/intel/compilers_and_libraries/mac/mkl/include"
-               extraLinkerFlags="-L/usr/local/lib -lsaf_mkl_custom_lp64 -lsaf_ipp_custom&#10;-Wl,-rpath,/usr/local/lib"
-               extraCompilerFlags="-pedantic&#10;-W &#10;-Wall &#10;-Wextra"
-               extraDefs="SAF_USE_INTEL_MKL_LP64&#10;SAF_USE_INTEL_IPP&#10;SAF_ENABLE_SOFA_READER_MODULE&#10;SAF_ENABLE_HADES_MODULE"
-               xcodeValidArchs="i386,x86_64">
+               extraCompilerFlags="-pedantic&#10;-W &#10;-Wall &#10;-Wextra&#10;-Wno-strict-prototypes"
+               extraDefs="SAF_USE_APPLE_ACCELERATE&#10;SAF_ENABLE_SOFA_READER_MODULE&#10;SAF_ENABLE_HADES_MODULE"
+               xcodeValidArchs="arm64,x86_64">
       <CONFIGURATIONS>
         <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="hades_renderer"
-                       binaryPath="" headerPath="../../../../../libs/ehades/include&#10;../../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../../SDKs/VST2_SDK&#10;/opt/intel/oneapi/mkl/latest/include&#10;/opt/intel/oneapi/ipp/latest/include"
-                       osxArchitecture="64BitIntel" osxCompatibility="10.10 SDK" enablePluginBinaryCopyStep="1"
+                       binaryPath="" headerPath="../../../../../libs/ehades/include&#10;../../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../../SDKs/VST2_SDK&#10;"
+                       osxArchitecture="64BitIntel" osxCompatibility="11.0 SDK" enablePluginBinaryCopyStep="1"
                        linkTimeOptimisation="1" userNotes="/opt/intel/compilers_and_libraries/mac/mkl/include"
-                       macOSDeploymentTarget="10.10"/>
+                       macOSDeploymentTarget="11.0"/>
         <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="hades_renderer_debug"
-                       binaryPath="" headerPath="../../../../../libs/ehades/include&#10;../../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../../SDKs/VST2_SDK&#10;/opt/intel/oneapi/mkl/latest/include&#10;/opt/intel/oneapi/ipp/latest/include"
-                       osxArchitecture="64BitIntel" osxCompatibility="10.10 SDK" enablePluginBinaryCopyStep="1"
-                       macOSDeploymentTarget="10.10"/>
+                       binaryPath="" headerPath="../../../../../libs/ehades/include&#10;../../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../../SDKs/VST2_SDK&#10;"
+                       osxArchitecture="64BitIntel" osxCompatibility="11.0 SDK" enablePluginBinaryCopyStep="1"
+                       macOSDeploymentTarget="11.0"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_opengl" path="../../SDKs/JUCE/modules"/>
