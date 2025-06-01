@@ -27,6 +27,7 @@ PluginEditor::PluginEditor (PluginProcessor* ownerFilter)
     s_diff2dir.reset (new juce::Slider ("new slider"));
     addAndMakeVisible (s_diff2dir.get());
     s_diff2dir->setRange (0, 2, 0.01);
+    s_diff2dir->setDoubleClickReturnValue(true, 1.0f);
     s_diff2dir->setSliderStyle (juce::Slider::LinearVertical);
     s_diff2dir->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
     s_diff2dir->setColour (juce::Slider::backgroundColourId, juce::Colour (0xff5c5d5e));
