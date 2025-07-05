@@ -17,8 +17,8 @@
 
 #include "PluginEditor.h"
 
-PluginEditor::PluginEditor (PluginProcessor* ownerFilter)
-    : AudioProcessorEditor(ownerFilter), progressbar(progress), fileChooserMAIR ("File", File(), true, false, false,
+PluginEditor::PluginEditor (PluginProcessor& p)
+    : AudioProcessorEditor(p), processor(p), progressbar(progress), fileChooserMAIR ("File", File(), true, false, false,
       "*.sofa;*.nc;", String(),
       "Load SOFA File"), fileChooserHRIR ("File", File(), true, false, false,
       "*.sofa;*.nc;", String(),
@@ -237,8 +237,7 @@ PluginEditor::PluginEditor (PluginProcessor* ownerFilter)
     setSize (842, 448);
 
     /* handles */
-    hVst = ownerFilter;
-    hHdR = hVst->getFXHandle();
+    hHdR = processor.getFXHandle();
 
     /* Look and Feel */
     LAF.setDefaultColours();
@@ -880,13 +879,13 @@ void PluginEditor::paint (juce::Graphics& g)
                        Justification::centredLeft, true);
             break;
         case k_warning_NinputCH:
-            g.drawText(TRANS("Insufficient number of input channels (") + String(hVst->getTotalNumInputChannels()) +
+            g.drawText(TRANS("Insufficient number of input channels (") + String(processor.getTotalNumInputChannels()) +
                        TRANS("/") + String(hades_renderer_getNmicsArray(hHdR)) + TRANS(")"),
                        getBounds().getWidth()-225, 16, 530, 11,
                        Justification::centredLeft, true);
             break;
         case k_warning_NoutputCH:
-            g.drawText(TRANS("Insufficient number of output channels (") + String(hVst->getTotalNumOutputChannels()) +
+            g.drawText(TRANS("Insufficient number of output channels (") + String(processor.getTotalNumOutputChannels()) +
                        TRANS("/") + String(2) + TRANS(")"),
                        getBounds().getWidth()-225, 16, 530, 11,
                        Justification::centredLeft, true);
@@ -1014,7 +1013,7 @@ void PluginEditor::timerCallback(int timerID)
             }
 
             /* display warning message, if needed */
-            if ((hVst->getCurrentBlockSize() % hades_renderer_getFrameSize()) != 0){
+            if ((processor.getCurrentBlockSize() % hades_renderer_getFrameSize()) != 0){
                 currentWarning = k_warning_frameSize;
                 repaint(0,0,getWidth(),32);
             }
@@ -1027,11 +1026,11 @@ void PluginEditor::timerCallback(int timerID)
                 currentWarning = k_warning_mismatch_fs;
                 repaint(0,0,getWidth(),32);
             }
-            else if (hVst->getCurrentNumInputs() < hades_renderer_getNmicsArray(hHdR)){
+            else if (processor.getCurrentNumInputs() < hades_renderer_getNmicsArray(hHdR)){
                 currentWarning = k_warning_NinputCH;
                 repaint(0,0,getWidth(),32);
             }
-            else if (hVst->getCurrentNumOutputs() < 2){
+            else if (processor.getCurrentNumOutputs() < 2){
                 currentWarning = k_warning_NoutputCH;
                 repaint(0,0,getWidth(),32);
             }

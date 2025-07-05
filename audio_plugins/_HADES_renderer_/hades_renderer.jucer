@@ -15,6 +15,8 @@
               enableIAA="0" companyCopyright="Aalto" pluginFormats="buildVST"
               jucerFormatVersion="1">
   <MAINGROUP id="imnfnp" name="hades_renderer">
+    <FILE id="YbTe1a" name="ParameterManager.h" compile="0" resource="0"
+          file="../resources/ParameterManager.h"/>
     <FILE id="gZgzcr" name="HADESLookAndFeel.h" compile="0" resource="0"
           file="../resources/HADESLookAndFeel.h"/>
     <FILE id="dJOC35" name="log2dSlider.cpp" compile="1" resource="0" file="../resources/log2dSlider.cpp"/>
