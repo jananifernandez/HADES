@@ -33,6 +33,10 @@ void PluginProcessor::setParameterValuesUsingInternalState()
 {
 }
 
+void PluginProcessor::setInternalStateUsingParameterValues()
+{
+}
+
 PluginProcessor::PluginProcessor():
     AudioProcessor(BusesProperties()
         .withInput("Input", AudioChannelSet::discreteChannels(HADES_MAX_NUM_CHANNELS), true)
@@ -262,6 +266,9 @@ void PluginProcessor::setStateInformation (const void* data, int sizeInBytes)
             if(xmlState->hasAttribute("refSensorIndexRIGHT"))
                 hades_renderer_setReferenceSensorIndex(hHdR, 1, xmlState->getIntAttribute("refSensorIndexRIGHT",1));
             
+            /* Many hosts will also trigger parameterChanged() for all parameters after calling setStateInformation() */
+            /* However, some hosts do not. Therefore, it is better to ensure that the internal state is always up-to-date by calling: */
+            setInternalStateUsingParameterValues();
         }
         
         hades_renderer_refreshSettings(hHdR);

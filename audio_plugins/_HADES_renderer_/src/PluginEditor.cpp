@@ -30,36 +30,21 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     s_diff2dir->setDoubleClickReturnValue(true, 1.0f);
     s_diff2dir->setSliderStyle (juce::Slider::LinearVertical);
     s_diff2dir->setTextBoxStyle (juce::Slider::NoTextBox, false, 80, 20);
-    s_diff2dir->setColour (juce::Slider::backgroundColourId, juce::Colour (0xff5c5d5e));
-    s_diff2dir->setColour (juce::Slider::trackColourId, juce::Colour (0xff315b6d));
-    s_diff2dir->setColour (juce::Slider::textBoxTextColourId, juce::Colours::white);
-    s_diff2dir->setColour (juce::Slider::textBoxBackgroundColourId, juce::Colour (0x00ffffff));
     s_diff2dir->addListener (this);
-
     s_diff2dir->setBounds (384, 354, 40, 74);
-
-    label_IR_fs_array.reset (new juce::Label ("new label",
-                                              juce::String()));
+    
+    label_IR_fs_array.reset (new juce::Label ("new label", juce::String()));
     addAndMakeVisible (label_IR_fs_array.get());
     label_IR_fs_array->setFont (juce::FontOptions (15.00f, juce::Font::plain).withStyle ("Regular"));
     label_IR_fs_array->setJustificationType (juce::Justification::centredLeft);
     label_IR_fs_array->setEditable (false, false, false);
-    label_IR_fs_array->setColour (juce::Label::outlineColourId, juce::Colour (0x68a3a2a2));
-    label_IR_fs_array->setColour (juce::TextEditor::textColourId, juce::Colours::black);
-    label_IR_fs_array->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
-
     label_IR_fs_array->setBounds (164, 166, 51, 20);
 
-    label_DAW_fs_array.reset (new juce::Label ("new label",
-                                               juce::String()));
+    label_DAW_fs_array.reset (new juce::Label ("new label", juce::String()));
     addAndMakeVisible (label_DAW_fs_array.get());
     label_DAW_fs_array->setFont (juce::FontOptions (15.00f, juce::Font::plain).withStyle ("Regular"));
     label_DAW_fs_array->setJustificationType (juce::Justification::centredLeft);
     label_DAW_fs_array->setEditable (false, false, false);
-    label_DAW_fs_array->setColour (juce::Label::outlineColourId, juce::Colour (0x68a3a2a2));
-    label_DAW_fs_array->setColour (juce::TextEditor::textColourId, juce::Colours::black);
-    label_DAW_fs_array->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
-
     label_DAW_fs_array->setBounds (164, 189, 51, 20);
 
     CBbeamformer.reset (new juce::ComboBox ("new combo box"));
@@ -69,105 +54,67 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     CBbeamformer->setTextWhenNothingSelected (TRANS("Default"));
     CBbeamformer->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     CBbeamformer->addListener (this);
-
     CBbeamformer->setBounds (122, 289, 98, 20);
 
-    label_N_nMics.reset (new juce::Label ("new label",
-                                          juce::String()));
+    label_N_nMics.reset (new juce::Label ("new label", juce::String()));
     addAndMakeVisible (label_N_nMics.get());
     label_N_nMics->setFont (juce::FontOptions (15.00f, juce::Font::plain).withStyle ("Regular"));
     label_N_nMics->setJustificationType (juce::Justification::centredLeft);
     label_N_nMics->setEditable (false, false, false);
-    label_N_nMics->setColour (juce::Label::outlineColourId, juce::Colour (0x68a3a2a2));
-    label_N_nMics->setColour (juce::TextEditor::textColourId, juce::Colours::black);
-    label_N_nMics->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
-
     label_N_nMics->setBounds (164, 97, 51, 20);
 
-    label_N_nDirs_array.reset (new juce::Label ("new label",
-                                                juce::String()));
+    label_N_nDirs_array.reset (new juce::Label ("new label", juce::String()));
     addAndMakeVisible (label_N_nDirs_array.get());
     label_N_nDirs_array->setFont (juce::FontOptions (15.00f, juce::Font::plain).withStyle ("Regular"));
     label_N_nDirs_array->setJustificationType (juce::Justification::centredLeft);
     label_N_nDirs_array->setEditable (false, false, false);
-    label_N_nDirs_array->setColour (juce::Label::outlineColourId, juce::Colour (0x68a3a2a2));
-    label_N_nDirs_array->setColour (juce::TextEditor::textColourId, juce::Colours::black);
-    label_N_nDirs_array->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
-
     label_N_nDirs_array->setBounds (164, 120, 51, 20);
 
-    label_IR_length_array.reset (new juce::Label ("new label",
-                                                  juce::String()));
+    label_IR_length_array.reset (new juce::Label ("new label", juce::String()));
     addAndMakeVisible (label_IR_length_array.get());
     label_IR_length_array->setFont (juce::FontOptions (15.00f, juce::Font::plain).withStyle ("Regular"));
     label_IR_length_array->setJustificationType (juce::Justification::centredLeft);
     label_IR_length_array->setEditable (false, false, false);
-    label_IR_length_array->setColour (juce::Label::outlineColourId, juce::Colour (0x68a3a2a2));
-    label_IR_length_array->setColour (juce::TextEditor::textColourId, juce::Colours::black);
-    label_IR_length_array->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
-
     label_IR_length_array->setBounds (164, 143, 51, 20);
 
     TBuseDefaultHRIRs.reset (new juce::ToggleButton ("new toggle button"));
     addAndMakeVisible (TBuseDefaultHRIRs.get());
     TBuseDefaultHRIRs->setButtonText (juce::String());
     TBuseDefaultHRIRs->addListener (this);
-
     TBuseDefaultHRIRs->setBounds (400, 91, 32, 24);
 
-    label_HRIR_fs_bin.reset (new juce::Label ("new label",
-                                              juce::String()));
+    label_HRIR_fs_bin.reset (new juce::Label ("new label", juce::String()));
     addAndMakeVisible (label_HRIR_fs_bin.get());
     label_HRIR_fs_bin->setFont (juce::FontOptions (15.00f, juce::Font::plain).withStyle ("Regular"));
     label_HRIR_fs_bin->setJustificationType (juce::Justification::centredLeft);
     label_HRIR_fs_bin->setEditable (false, false, false);
-    label_HRIR_fs_bin->setColour (juce::Label::outlineColourId, juce::Colour (0x68a3a2a2));
-    label_HRIR_fs_bin->setColour (juce::TextEditor::textColourId, juce::Colours::black);
-    label_HRIR_fs_bin->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
-
     label_HRIR_fs_bin->setBounds (377, 166, 51, 20);
 
-    label_DAW_fs_bin.reset (new juce::Label ("new label",
-                                             juce::String()));
+    label_DAW_fs_bin.reset (new juce::Label ("new label", juce::String()));
     addAndMakeVisible (label_DAW_fs_bin.get());
     label_DAW_fs_bin->setFont (juce::FontOptions (15.00f, juce::Font::plain).withStyle ("Regular"));
     label_DAW_fs_bin->setJustificationType (juce::Justification::centredLeft);
     label_DAW_fs_bin->setEditable (false, false, false);
-    label_DAW_fs_bin->setColour (juce::Label::outlineColourId, juce::Colour (0x68a3a2a2));
-    label_DAW_fs_bin->setColour (juce::TextEditor::textColourId, juce::Colours::black);
-    label_DAW_fs_bin->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
-
     label_DAW_fs_bin->setBounds (377, 189, 51, 20);
 
-    label_N_nDirs_bin.reset (new juce::Label ("new label",
-                                              juce::String()));
+    label_N_nDirs_bin.reset (new juce::Label ("new label", juce::String()));
     addAndMakeVisible (label_N_nDirs_bin.get());
     label_N_nDirs_bin->setFont (juce::FontOptions (15.00f, juce::Font::plain).withStyle ("Regular"));
     label_N_nDirs_bin->setJustificationType (juce::Justification::centredLeft);
     label_N_nDirs_bin->setEditable (false, false, false);
-    label_N_nDirs_bin->setColour (juce::Label::outlineColourId, juce::Colour (0x68a3a2a2));
-    label_N_nDirs_bin->setColour (juce::TextEditor::textColourId, juce::Colours::black);
-    label_N_nDirs_bin->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
-
     label_N_nDirs_bin->setBounds (377, 121, 51, 20);
 
-    label_IR_length_bin.reset (new juce::Label ("new label",
-                                                juce::String()));
+    label_IR_length_bin.reset (new juce::Label ("new label", juce::String()));
     addAndMakeVisible (label_IR_length_bin.get());
     label_IR_length_bin->setFont (juce::FontOptions (15.00f, juce::Font::plain).withStyle ("Regular"));
     label_IR_length_bin->setJustificationType (juce::Justification::centredLeft);
     label_IR_length_bin->setEditable (false, false, false);
-    label_IR_length_bin->setColour (juce::Label::outlineColourId, juce::Colour (0x68a3a2a2));
-    label_IR_length_bin->setColour (juce::TextEditor::textColourId, juce::Colours::black);
-    label_IR_length_bin->setColour (juce::TextEditor::backgroundColourId, juce::Colour (0x00000000));
-
     label_IR_length_bin->setBounds (377, 143, 51, 20);
 
     TBenableCM.reset (new juce::ToggleButton ("new toggle button"));
     addAndMakeVisible (TBenableCM.get());
     TBenableCM->setButtonText (juce::String());
     TBenableCM->addListener (this);
-
     TBenableCM->setBounds (195, 310, 32, 24);
 
     SL_analysis_avg.reset (new juce::Slider ("new slider"));
@@ -175,10 +122,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     SL_analysis_avg->setRange (0, 1, 0.01);
     SL_analysis_avg->setSliderStyle (juce::Slider::LinearHorizontal);
     SL_analysis_avg->setTextBoxStyle (juce::Slider::TextBoxRight, false, 45, 20);
-    SL_analysis_avg->setColour (juce::Slider::backgroundColourId, juce::Colour (0xff5c5d5e));
-    SL_analysis_avg->setColour (juce::Slider::trackColourId, juce::Colour (0xff315b6e));
     SL_analysis_avg->addListener (this);
-
     SL_analysis_avg->setBounds (328, 241, 98, 22);
 
     SL_synthesis_avg.reset (new juce::Slider ("new slider"));
@@ -186,10 +130,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     SL_synthesis_avg->setRange (0, 1, 0.01);
     SL_synthesis_avg->setSliderStyle (juce::Slider::LinearHorizontal);
     SL_synthesis_avg->setTextBoxStyle (juce::Slider::TextBoxRight, false, 45, 20);
-    SL_synthesis_avg->setColour (juce::Slider::backgroundColourId, juce::Colour (0xff5c5d5e));
-    SL_synthesis_avg->setColour (juce::Slider::trackColourId, juce::Colour (0xff315b6e));
     SL_synthesis_avg->addListener (this);
-
     SL_synthesis_avg->setBounds (328, 265, 98, 22);
 
     SL_left_ref_idx.reset (new juce::Slider ("new slider"));
@@ -197,10 +138,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     SL_left_ref_idx->setRange (0, 64, 1);
     SL_left_ref_idx->setSliderStyle (juce::Slider::LinearHorizontal);
     SL_left_ref_idx->setTextBoxStyle (juce::Slider::TextBoxRight, false, 45, 20);
-    SL_left_ref_idx->setColour (juce::Slider::backgroundColourId, juce::Colour (0xff5c5d5e));
-    SL_left_ref_idx->setColour (juce::Slider::trackColourId, juce::Colour (0xff315b6e));
     SL_left_ref_idx->addListener (this);
-
     SL_left_ref_idx->setBounds (394, 289, 32, 20);
 
     SL_right_ref_idx.reset (new juce::Slider ("new slider"));
@@ -208,10 +146,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     SL_right_ref_idx->setRange (0, 64, 1);
     SL_right_ref_idx->setSliderStyle (juce::Slider::LinearHorizontal);
     SL_right_ref_idx->setTextBoxStyle (juce::Slider::TextBoxRight, false, 45, 20);
-    SL_right_ref_idx->setColour (juce::Slider::backgroundColourId, juce::Colour (0xff5c5d5e));
-    SL_right_ref_idx->setColour (juce::Slider::trackColourId, juce::Colour (0xff315b6e));
     SL_right_ref_idx->addListener (this);
-
     SL_right_ref_idx->setBounds (394, 313, 32, 20);
 
     CBdoaEstimator.reset (new juce::ComboBox ("new combo box"));
@@ -221,7 +156,6 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     CBdoaEstimator->setTextWhenNothingSelected (TRANS("Default"));
     CBdoaEstimator->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     CBdoaEstimator->addListener (this);
-
     CBdoaEstimator->setBounds (122, 245, 98, 20);
 
     CBdiffEstimator.reset (new juce::ComboBox ("new combo box"));
@@ -231,7 +165,6 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     CBdiffEstimator->setTextWhenNothingSelected (TRANS("Default"));
     CBdiffEstimator->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     CBdiffEstimator->addListener (this);
-
     CBdiffEstimator->setBounds (122, 267, 98, 20);
 
     setSize (842, 448);
@@ -240,7 +173,6 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     hHdR = processor.getFXHandle();
 
     /* Look and Feel */
-    LAF.setDefaultColours();
     setLookAndFeel(&LAF);
 
     /* remove slider bit of these sliders */

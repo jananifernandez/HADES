@@ -1,24 +1,19 @@
 /*
- ==============================================================================
- 
- This file is part of SPARTA; a suite of spatial audio plug-ins.
- Copyright (c) 2025 - Janani Fernandez.
- 
- SPARTA is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
- 
- SPARTA is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- 
- You should have received a copy of the GNU General Public License
- along with SPARTA.  If not, see <http://www.gnu.org/licenses/>.
- 
- ==============================================================================
-*/
+ * This file is part of HADES
+ * Copyright (c) 2025 - Janani Fernandez.
+ *
+ * HADES is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later
+ * version.
+ *
+ * HADES is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+ * A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * See <http://www.gnu.org/licenses/> for a copy of the GNU General Public
+ * License.
+ */
 
 #include <JuceHeader.h>
 
@@ -65,6 +60,9 @@ public:
     int getParameterInt(const juce::String& parameterID) const {
         return static_cast<int>(*parameters.getRawParameterValue(parameterID));
     }
+    bool getParameterBool(const juce::String& parameterID) const {
+        return static_cast<bool>(*parameters.getRawParameterValue(parameterID)+0.5f);
+    }
     int getParameterChoice(const juce::String& parameterID) const {
         return static_cast<int>(*parameters.getRawParameterValue(parameterID));
     }
@@ -77,7 +75,11 @@ class SliderWithAttachment : public juce::Slider
 {
 public:
     SliderWithAttachment(juce::AudioProcessorValueTreeState& parameters, const juce::String& paramID)
-        : attachment(parameters, paramID, *this) {}
+        : attachment(parameters, paramID, *this) {
+            auto* param = dynamic_cast<juce::AudioProcessorParameterWithID*>(parameters.getParameter(paramID));
+            if (param != nullptr)
+                setTextValueSuffix(param->getLabel());
+        }
 private:
     juce::AudioProcessorValueTreeState::SliderAttachment attachment;
 };
@@ -106,3 +108,9 @@ public:
 private:
     juce::AudioProcessorValueTreeState::ButtonAttachment attachment;
 };
+
+inline void setSliderAsTextBoxOnly(juce::Slider& slider)
+{
+    slider.setSliderStyle(juce::Slider::LinearBarVertical);
+    slider.setSliderSnapsToMousePosition(false);
+}
