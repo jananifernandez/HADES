@@ -262,7 +262,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     publicationLink.setJustificationType(Justification::centredLeft);
 
     /* Specify screen refresh rate */
-    startTimer(TIMER_GUI_RELATED, 120);
+    startTimer(120);
 
     currentWarning = k_warning_none;
 }
@@ -883,93 +883,84 @@ void PluginEditor::buttonClicked (juce::Button* buttonThatWasClicked)
     }
 }
 
-void PluginEditor::timerCallback(int timerID)
+void PluginEditor::timerCallback()
 {
-    switch(timerID){
-        case TIMER_PROCESSING_RELATED:
-            /* Handled in PluginProcessor */
-            break;
+    /* parameters whos values can change internally should be periodically refreshed */
+    s_diff2dir->setValue(hades_renderer_getStreamBalanceAllBands(hHdR), dontSendNotification);
+    SL_left_ref_idx->setValue((double)hades_renderer_getReferenceSensorIndex(hHdR,0), dontSendNotification);
+    SL_right_ref_idx->setValue((double)hades_renderer_getReferenceSensorIndex(hHdR,1), dontSendNotification);
+    label_IR_fs_array->setText(String(hades_renderer_getIRsamplerateArray(hHdR)), dontSendNotification);
+    label_DAW_fs_array->setText(String(hades_renderer_getDAWsamplerate(hHdR)), dontSendNotification);
+    label_N_nMics->setText(String(hades_renderer_getNmicsArray(hHdR)), dontSendNotification);
+    label_N_nDirs_array->setText(String(hades_renderer_getNDirsArray(hHdR)), dontSendNotification);
+    label_IR_length_array->setText(String(hades_renderer_getIRlengthArray(hHdR)), dontSendNotification);
+    label_HRIR_fs_bin->setText(String(hades_renderer_getIRsamplerateBin(hHdR)), dontSendNotification);
+    label_DAW_fs_bin->setText(String(hades_renderer_getDAWsamplerate(hHdR)), dontSendNotification);
+    label_N_nDirs_bin->setText(String(hades_renderer_getNDirsBin(hHdR)), dontSendNotification);
+    label_IR_length_bin->setText(String(hades_renderer_getIRlengthBin(hHdR)), dontSendNotification);
 
-        case TIMER_GUI_RELATED:
+    /* refresh */
+    int nPoints;
+    float* pX_vector;
+    float* pY_values;
+    if (streamBalance2dSlider->getRefreshValuesFLAG() && hades_renderer_getCodecStatus(hHdR)==CODEC_STATUS_INITIALISED){
+        hades_renderer_setStreamBalanceFromLocal(hHdR);
+        hades_renderer_getStreamBalanceLocalPtrs(hHdR, &pX_vector, &pY_values, &nPoints);
+        streamBalance2dSlider->setDataHandles(pX_vector, pY_values, nPoints);
+        streamBalance2dSlider->repaint();
+        streamBalance2dSlider->setRefreshValuesFLAG(false);
+    }
+    dirGainEditor->refresh();
 
-            /* parameters whos values can change internally should be periodically refreshed */
-            s_diff2dir->setValue(hades_renderer_getStreamBalanceAllBands(hHdR), dontSendNotification);
-            SL_left_ref_idx->setValue((double)hades_renderer_getReferenceSensorIndex(hHdR,0), dontSendNotification);
-            SL_right_ref_idx->setValue((double)hades_renderer_getReferenceSensorIndex(hHdR,1), dontSendNotification);
-            label_IR_fs_array->setText(String(hades_renderer_getIRsamplerateArray(hHdR)), dontSendNotification);
-            label_DAW_fs_array->setText(String(hades_renderer_getDAWsamplerate(hHdR)), dontSendNotification);
-            label_N_nMics->setText(String(hades_renderer_getNmicsArray(hHdR)), dontSendNotification);
-            label_N_nDirs_array->setText(String(hades_renderer_getNDirsArray(hHdR)), dontSendNotification);
-            label_IR_length_array->setText(String(hades_renderer_getIRlengthArray(hHdR)), dontSendNotification);
-            label_HRIR_fs_bin->setText(String(hades_renderer_getIRsamplerateBin(hHdR)), dontSendNotification);
-            label_DAW_fs_bin->setText(String(hades_renderer_getDAWsamplerate(hHdR)), dontSendNotification);
-            label_N_nDirs_bin->setText(String(hades_renderer_getNDirsBin(hHdR)), dontSendNotification);
-            label_IR_length_bin->setText(String(hades_renderer_getIRlengthBin(hHdR)), dontSendNotification);
+    /* Progress bar */
+    if(hades_renderer_getCodecStatus(hHdR)==CODEC_STATUS_INITIALISING){
+        addAndMakeVisible(progressbar);
+        progress = (double)hades_renderer_getProgressBar0_1(hHdR);
+        char text[HADES_PROGRESSBARTEXT_CHAR_LENGTH];
+        hades_renderer_getProgressBarText(hHdR, (char*)text);
+        progressbar.setTextToDisplay(String(text));
+    }
+    else
+        removeChildComponent(&progressbar);
 
-            /* refresh */
-            int nPoints;
-            float* pX_vector;
-            float* pY_values;
-            if (streamBalance2dSlider->getRefreshValuesFLAG() && hades_renderer_getCodecStatus(hHdR)==CODEC_STATUS_INITIALISED){
-                hades_renderer_setStreamBalanceFromLocal(hHdR);
-                hades_renderer_getStreamBalanceLocalPtrs(hHdR, &pX_vector, &pY_values, &nPoints);
-                streamBalance2dSlider->setDataHandles(pX_vector, pY_values, nPoints);
-                streamBalance2dSlider->repaint();
-                streamBalance2dSlider->setRefreshValuesFLAG(false);
-            }
-            dirGainEditor->refresh();
+    /* Some parameters shouldn't be editable during initialisation*/
+    if(hades_renderer_getCodecStatus(hHdR)==CODEC_STATUS_INITIALISING){
+        if(fileChooserMAIR.isEnabled())
+            fileChooserMAIR.setEnabled(false);
+        if(fileChooserHRIR.isEnabled())
+            fileChooserHRIR.setEnabled(false);
+    }
+    else {
+        if(!fileChooserMAIR.isEnabled())
+            fileChooserMAIR.setEnabled(true);
+        if(!fileChooserHRIR.isEnabled())
+            fileChooserHRIR.setEnabled(true);
+    }
 
-            /* Progress bar */
-            if(hades_renderer_getCodecStatus(hHdR)==CODEC_STATUS_INITIALISING){
-                addAndMakeVisible(progressbar);
-                progress = (double)hades_renderer_getProgressBar0_1(hHdR);
-                char text[HADES_PROGRESSBARTEXT_CHAR_LENGTH];
-                hades_renderer_getProgressBarText(hHdR, (char*)text);
-                progressbar.setTextToDisplay(String(text));
-            }
-            else
-                removeChildComponent(&progressbar);
-
-            /* Some parameters shouldn't be editable during initialisation*/
-            if(hades_renderer_getCodecStatus(hHdR)==CODEC_STATUS_INITIALISING){
-                if(fileChooserMAIR.isEnabled())
-                    fileChooserMAIR.setEnabled(false);
-                if(fileChooserHRIR.isEnabled())
-                    fileChooserHRIR.setEnabled(false);
-            }
-            else {
-                if(!fileChooserMAIR.isEnabled())
-                    fileChooserMAIR.setEnabled(true);
-                if(!fileChooserHRIR.isEnabled())
-                    fileChooserHRIR.setEnabled(true);
-            }
-
-            /* display warning message, if needed */
-            if ((processor.getCurrentBlockSize() % hades_renderer_getFrameSize()) != 0){
-                currentWarning = k_warning_frameSize;
-                repaint(0,0,getWidth(),32);
-            }
-            else if ( !((hades_renderer_getDAWsamplerate(hHdR) == 44.1e3) || (hades_renderer_getDAWsamplerate(hHdR) == 48e3)) ){
-                currentWarning = k_warning_supported_fs;
-                repaint(0,0,getWidth(),32);
-            }
-            else if ((hades_renderer_getDAWsamplerate(hHdR) != hades_renderer_getIRsamplerateArray(hHdR)) ||
-                      hades_renderer_getDAWsamplerate(hHdR) != hades_renderer_getIRsamplerateBin(hHdR)){
-                currentWarning = k_warning_mismatch_fs;
-                repaint(0,0,getWidth(),32);
-            }
-            else if (processor.getCurrentNumInputs() < hades_renderer_getNmicsArray(hHdR)){
-                currentWarning = k_warning_NinputCH;
-                repaint(0,0,getWidth(),32);
-            }
-            else if (processor.getCurrentNumOutputs() < 2){
-                currentWarning = k_warning_NoutputCH;
-                repaint(0,0,getWidth(),32);
-            }
-            else if(currentWarning){
-                currentWarning = k_warning_none;
-                repaint(0,0,getWidth(),32);
-            }
-            break;
+    /* display warning message, if needed */
+    if ((processor.getCurrentBlockSize() % hades_renderer_getFrameSize()) != 0){
+        currentWarning = k_warning_frameSize;
+        repaint(0,0,getWidth(),32);
+    }
+    else if ( !((hades_renderer_getDAWsamplerate(hHdR) == 44.1e3) || (hades_renderer_getDAWsamplerate(hHdR) == 48e3)) ){
+        currentWarning = k_warning_supported_fs;
+        repaint(0,0,getWidth(),32);
+    }
+    else if ((hades_renderer_getDAWsamplerate(hHdR) != hades_renderer_getIRsamplerateArray(hHdR)) ||
+              hades_renderer_getDAWsamplerate(hHdR) != hades_renderer_getIRsamplerateBin(hHdR)){
+        currentWarning = k_warning_mismatch_fs;
+        repaint(0,0,getWidth(),32);
+    }
+    else if (processor.getCurrentNumInputs() < hades_renderer_getNmicsArray(hHdR)){
+        currentWarning = k_warning_NinputCH;
+        repaint(0,0,getWidth(),32);
+    }
+    else if (processor.getCurrentNumOutputs() < 2){
+        currentWarning = k_warning_NoutputCH;
+        repaint(0,0,getWidth(),32);
+    }
+    else if(currentWarning){
+        currentWarning = k_warning_none;
+        repaint(0,0,getWidth(),32);
     }
 }

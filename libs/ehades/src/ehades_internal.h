@@ -73,7 +73,21 @@ typedef enum {
 #define HOP_SIZE ( 128 )
 #if (FRAME_SIZE % HOP_SIZE != 0)
 # error "FRAME_SIZE must be an integer multiple of HOP_SIZE"
-#endif 
+#endif
+
+#if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L) && !defined(__STDC_NO_ATOMICS__)
+  typedef _Atomic HADES_RENDERER_DIFFUSENESS_ESTIMATORS _Atomic_HADES_RENDERER_DIFFUSENESS_ESTIMATORS;
+  typedef _Atomic HADES_RENDERER_DOA_ESTIMATORS _Atomic_HADES_RENDERER_DOA_ESTIMATORS;
+  typedef _Atomic HADES_RENDERER_BEAMFORMER_TYPE _Atomic_HADES_RENDERER_BEAMFORMER_TYPE;
+  typedef _Atomic HADES_CODEC_STATUS _Atomic_HADES_CODEC_STATUS;
+  typedef _Atomic PROC_STATUS _Atomic_PROC_STATUS;
+#else
+  typedef HADES_RENDERER_DIFFUSENESS_ESTIMATORS _Atomic_HADES_RENDERER_DIFFUSENESS_ESTIMATORS;
+  typedef HADES_RENDERER_DOA_ESTIMATORS _Atomic_HADES_RENDERER_DOA_ESTIMATORS;
+  typedef HADES_RENDERER_BEAMFORMER_TYPE _Atomic_HADES_RENDERER_BEAMFORMER_TYPE;
+  typedef HADES_CODEC_STATUS _Atomic_HADES_CODEC_STATUS;
+  typedef PROC_STATUS _Atomic_PROC_STATUS;
+#endif
 
 /* ========================================================================== */
 /*                                 Structures                                 */
@@ -93,10 +107,10 @@ typedef struct _hades_renderer {
     hades_param_container_handle hPCon;      /**< Parameter Container handle */
     hades_signal_container_handle hSCon;     /**< Signal Container handle */
     hades_radial_editor_handle hREd;         /**< Parameter radial editor handle */
-    HADES_CODEC_STATUS codecStatus;          /**< see #HADES_CODEC_STATUS */
-    float progressBar0_1;                    /**< Progress bar value [0..1] */
+    _Atomic_HADES_CODEC_STATUS codecStatus;          /**< see #HADES_CODEC_STATUS */
+    _Atomic_FLOAT32 progressBar0_1;                    /**< Progress bar value [0..1] */
     char* progressBarText;                   /**< Progress bar text; HADES_PROGRESSBARTEXT_CHAR_LENGTH x 1*/
-    PROC_STATUS procStatus;                  /**< see #_PROC_STATUS */
+    _Atomic_PROC_STATUS procStatus;                  /**< see #_PROC_STATUS */
 
     /* Local copy of internal parameter vectors (for optional thread-safe GUI plotting) */
     int nBands_local;                        /**< Number of bands used for plotting */
@@ -108,21 +122,21 @@ typedef struct _hades_renderer {
     float dirGain_dB[360];                   /**< extra radial gain control for the direct stream only, in dB */ 
  
     /* IR data */
-    int nMics;                               /**< Number of microphones/hydrophones in the array */
-    int nDirs;                               /**< Number of measurement directions/IRs */
-    int IRlength;                            /**< Length of IRs, in samples */
-    float IR_fs;                             /**< Sample rate used for measuring the IRs */
+    _Atomic_INT32 nMics;                     /**< Number of microphones/hydrophones in the array */
+    _Atomic_INT32 nDirs;                     /**< Number of measurement directions/IRs */
+    _Atomic_INT32 IRlength;                  /**< Length of IRs, in samples */
+    _Atomic_FLOAT32 IR_fs;                   /**< Sample rate used for measuring the IRs */
 
     /* user parameters */
     hades_binaural_config binConfig;         /**< Binaural configuration settings */
     char* sofa_filepath_MAIR;                /**< microphone array IRs; absolute/relevative file path for a sofa file */
-    int useDefaultHRIRsFLAG;                 /**< 0: use specified sofa file, 1: use default HRIR set */
+    _Atomic_INT32 useDefaultHRIRsFLAG;       /**< 0: use specified sofa file, 1: use default HRIR set */
     char* sofa_filepath_HRIR;                /**< HRIRs; absolute/relevative file path for a sofa file */
-    int refsensor_idx[2];                    /**< Indices defining the left 0 and right 1 reference sensors */
-    HADES_RENDERER_DIFFUSENESS_ESTIMATORS diffOption; /**< see #HADES_RENDERER_DIFFUSENESS_ESTIMATORS */
-    HADES_RENDERER_DOA_ESTIMATORS doaOption; /**< see #HADES_RENDERER_DOA_ESTIMATORS */
-    HADES_RENDERER_BEAMFORMER_TYPE beamOption; /**< see #HADES_RENDERER_BEAMFORMER_TYPE */
-    int enableCovMatching;                   /**< 0: disabled; 1: spatial covariance matching is enabled */
+    _Atomic_INT32 refsensor_idx[2];          /**< Indices defining the left 0 and right 1 reference sensors */
+    _Atomic_HADES_RENDERER_DIFFUSENESS_ESTIMATORS diffOption; /**< see #HADES_RENDERER_DIFFUSENESS_ESTIMATORS */
+    _Atomic_HADES_RENDERER_DOA_ESTIMATORS doaOption; /**< see #HADES_RENDERER_DOA_ESTIMATORS */
+    _Atomic_HADES_RENDERER_BEAMFORMER_TYPE beamOption; /**< see #HADES_RENDERER_BEAMFORMER_TYPE */
+    _Atomic_INT32 enableCovMatching;         /**< 0: disabled; 1: spatial covariance matching is enabled */
     
 } hades_renderer_data;
 

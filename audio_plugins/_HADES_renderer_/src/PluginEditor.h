@@ -33,7 +33,7 @@ typedef enum _HADES_WARNINGS{
 }HADES_WARNINGS;
 
 class PluginEditor  : public AudioProcessorEditor,
-                      public MultiTimer,
+                      public Timer,
                       private FilenameComponentListener,
                       public juce::Slider::Listener,
                       public juce::ComboBox::Listener,
@@ -52,7 +52,7 @@ public:
 private:
     PluginProcessor& processor;
     void* hHdR;
-    void timerCallback(int timerID) override;
+    void timerCallback() override;
     double progress = 0.0;
     ProgressBar progressbar;
 

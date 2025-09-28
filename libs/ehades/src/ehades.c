@@ -155,6 +155,7 @@ void hades_renderer_initCodec
     float* eq, *streamBalance, *tmp;
     SAF_SOFA_ERROR_CODES error;
     saf_sofa_container sofa;
+    int refsensor_idx[2];
     float* grid_dirs_deg;
     HADES_DOA_ESTIMATORS doaOpt;
     HADES_DIFFUSENESS_ESTIMATORS diffOpt;
@@ -268,7 +269,9 @@ void hades_renderer_initCodec
             pData->useDefaultHRIRsFLAG = 1;
         }
         hades_synthesis_destroy(&(pData->hSyn));
-        hades_synthesis_create(&(pData->hSyn), pData->hAna, beamOpt, pData->enableCovMatching, pData->refsensor_idx, &pData->binConfig, HADES_HRTF_INTERP_NEAREST);
+        refsensor_idx[0] = pData->refsensor_idx[0];
+        refsensor_idx[1] = pData->refsensor_idx[1];
+        hades_synthesis_create(&(pData->hSyn), pData->hAna, beamOpt, pData->enableCovMatching, refsensor_idx, &pData->binConfig, HADES_HRTF_INTERP_NEAREST);
         *hades_synthesis_getSynthesisAveragingCoeffPtr(pData->hSyn) = 0.77f;
 
         /* Parameter radial editor */
