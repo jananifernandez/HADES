@@ -47,18 +47,17 @@ PluginProcessor::PluginProcessor():
         .withOutput("Output", AudioChannelSet::discreteChannels(2), true)),
     ParameterManager(*this, createParameterLayout())
 {
-	nSampleRate = 48000;
-	hades_renderer_create(&hHdR);
-    
-    /* Grab defaults */
-    setParameterValuesUsingInternalState();
+    nSampleRate = 48000;
+    hades_renderer_create(&hHdR);
+    addParameterListeners(this);
 
     startTimer(40); 
 }
 
 PluginProcessor::~PluginProcessor()
 {
-	hades_renderer_destroy(&hHdR);
+    removeParameterListeners(this);
+    hades_renderer_destroy(&hHdR);
 }
 
 void PluginProcessor::setCurrentProgram (int /*index*/)
@@ -114,6 +113,11 @@ void PluginProcessor::changeProgramName (int /*index*/, const String& /*newName*
 
 void PluginProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+    if(firstInit){
+        /* Need to grab defaults */
+        setParameterValuesUsingInternalState();
+        firstInit = false;
+    }
     nHostBlockSize = samplesPerBlock;
     nNumInputs =  jmin(getTotalNumInputChannels(), 256);
     nNumOutputs = jmin(getTotalNumOutputChannels(), 256);
@@ -276,7 +280,7 @@ void PluginProcessor::setStateInformation (const void* data, int sizeInBytes)
         }
         
         hades_renderer_refreshSettings(hHdR);
-	}
+    }
 }
 
 //==============================================================================

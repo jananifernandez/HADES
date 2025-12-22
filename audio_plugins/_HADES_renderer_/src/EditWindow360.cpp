@@ -135,7 +135,7 @@ void EditWindow360::paint (juce::Graphics& g)
 
 void EditWindow360::resized()
 {
-	repaint();
+    repaint();
 }
 
 void EditWindow360::mouseDown (const juce::MouseEvent& /*e*/)

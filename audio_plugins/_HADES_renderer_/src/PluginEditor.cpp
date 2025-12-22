@@ -784,10 +784,10 @@ void PluginEditor::paint (juce::Graphics& g)
     }
 
     g.setColour(Colours::white);
-	g.setFont(juce::FontOptions (11.00f, Font::plain));
-	g.drawText(TRANS("Ver ") + JucePlugin_VersionString + BUILD_VER_SUFFIX + TRANS(", Build Date ") + __DATE__ + TRANS(" "),
-		175, 16, 530, 11,
-		Justification::centredLeft, true);
+    g.setFont(juce::FontOptions (11.00f, Font::plain));
+    g.drawText(TRANS("Ver ") + JucePlugin_VersionString + BUILD_VER_SUFFIX + TRANS(", Build Date ") + __DATE__ + TRANS(" "),
+        175, 16, 530, 11,
+        Justification::centredLeft, true);
 
     /* display warning message */
     g.setColour(Colours::red);
@@ -827,7 +827,7 @@ void PluginEditor::paint (juce::Graphics& g)
 
 void PluginEditor::resized()
 {
-	repaint();
+    repaint();
 }
 
 void PluginEditor::sliderValueChanged (juce::Slider* sliderThatWasMoved)
