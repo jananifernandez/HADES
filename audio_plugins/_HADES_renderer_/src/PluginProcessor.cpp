@@ -22,7 +22,7 @@
 # error "AAX Default Settings Chunk is enabled. This may override parameter defaults."
 #endif
 
-juce::AudioProcessorValueTreeState::ParameterLayout PluginProcessor::createParameterLayout()
+static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
 {
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
     
@@ -41,11 +41,12 @@ void PluginProcessor::setInternalStateUsingParameterValues()
 {
 }
 
-PluginProcessor::PluginProcessor():
-    AudioProcessor(BusesProperties()
-        .withInput("Input", AudioChannelSet::discreteChannels(HADES_MAX_NUM_CHANNELS), true)
-        .withOutput("Output", AudioChannelSet::discreteChannels(2), true)),
-    ParameterManager(*this, createParameterLayout())
+PluginProcessor::PluginProcessor()
+    : PluginProcessorBase(
+        BusesProperties()
+            .withInput("Input", AudioChannelSet::discreteChannels(HADES_MAX_NUM_CHANNELS), true)
+            .withOutput("Output", AudioChannelSet::discreteChannels(2), true),
+        createParameterLayout())
 {
     nSampleRate = 48000;
     hades_renderer_create(&hHdR);
@@ -56,59 +57,9 @@ PluginProcessor::PluginProcessor():
 
 PluginProcessor::~PluginProcessor()
 {
+    stopTimer();
     removeParameterListeners(this);
     hades_renderer_destroy(&hHdR);
-}
-
-void PluginProcessor::setCurrentProgram (int /*index*/)
-{
-}
-
-const String PluginProcessor::getName() const
-{
-    return JucePlugin_Name;
-}
-
-double PluginProcessor::getTailLengthSeconds() const
-{
-    return 0.0;
-}
-
-int PluginProcessor::getNumPrograms()
-{
-    return 1;
-}
-
-int PluginProcessor::getCurrentProgram()
-{
-    return 0;
-}
-
-const String PluginProcessor::getProgramName (int /*index*/)
-{
-    return String();
-}
-
-bool PluginProcessor::acceptsMidi() const
-{
-   #if JucePlugin_WantsMidiInput
-    return true;
-   #else
-    return false;
-   #endif
-}
-
-bool PluginProcessor::producesMidi() const
-{
-   #if JucePlugin_ProducesMidiOutput
-    return true;
-   #else
-    return false;
-   #endif
-}
-
-void PluginProcessor::changeProgramName (int /*index*/, const String& /*newName*/)
-{
 }
 
 void PluginProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
@@ -125,10 +76,6 @@ void PluginProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
     
     hades_renderer_init(hHdR, sampleRate);
     AudioProcessor::setLatencySamples(hades_renderer_getProcessingDelay(hHdR));
-}
-
-void PluginProcessor::releaseResources()
-{
 }
 
 void PluginProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& /*midiMessages*/)
@@ -155,18 +102,11 @@ void PluginProcessor::processBlock (AudioSampleBuffer& buffer, MidiBuffer& /*mid
         buffer.clear();
 }
 
-//==============================================================================
-bool PluginProcessor::hasEditor() const
-{
-    return true; 
-}
-
 AudioProcessorEditor* PluginProcessor::createEditor()
 {
     return new PluginEditor (*this);
 }
 
-//==============================================================================
 void PluginProcessor::getStateInformation (MemoryBlock& destData)
 {
     juce::ValueTree state = parameters.copyState();
@@ -238,7 +178,13 @@ void PluginProcessor::setStateInformation (const void* data, int sizeInBytes)
             setParameterValuesUsingInternalState();
         }
         else if(xmlState->getIntAttribute("VersionCode")>=0x10002){
+            removeParameterListeners(this);
             parameters.replaceState(juce::ValueTree::fromXml(*xmlState));
+            addParameterListeners(this);
+            
+            /* Many hosts will also trigger parameterChanged() for all parameters after calling setStateInformation() */
+            /* However, some hosts do not. Therefore, it is better to ensure that the internal state is always up-to-date by calling: */
+            setInternalStateUsingParameterValues();
             
             /* Now for the other DSP object parameters (that have no JUCE parameter counterpart) */
             for(int band=0; band<hades_renderer_getNumberOfBands(hHdR); band++){
@@ -273,10 +219,6 @@ void PluginProcessor::setStateInformation (const void* data, int sizeInBytes)
                 hades_renderer_setReferenceSensorIndex(hHdR, 0, xmlState->getIntAttribute("refSensorIndexLEFT",1));
             if(xmlState->hasAttribute("refSensorIndexRIGHT"))
                 hades_renderer_setReferenceSensorIndex(hHdR, 1, xmlState->getIntAttribute("refSensorIndexRIGHT",1));
-            
-            /* Many hosts will also trigger parameterChanged() for all parameters after calling setStateInformation() */
-            /* However, some hosts do not. Therefore, it is better to ensure that the internal state is always up-to-date by calling: */
-            setInternalStateUsingParameterValues();
         }
         
         hades_renderer_refreshSettings(hHdR);

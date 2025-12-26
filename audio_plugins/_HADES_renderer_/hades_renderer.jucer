@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="lfkRjX" name="hades_renderer" projectType="audioplug" version="1.0.3"
+<JUCERPROJECT id="lfkRjX" name="hades_renderer" projectType="audioplug" version="1.0.4"
               bundleIdentifier="com.LeoMcCormack.compass" includeBinaryInAppConfig="1"
               buildVST="1" buildAU="0" pluginName="hades_renderer" pluginDesc="hades_renderer"
               pluginManufacturer="AALTO" pluginManufacturerCode="LEOM" pluginCode="HADE"
@@ -17,6 +17,8 @@
   <MAINGROUP id="imnfnp" name="hades_renderer">
     <FILE id="YbTe1a" name="ParameterManager.h" compile="0" resource="0"
           file="../resources/ParameterManager.h"/>
+    <FILE id="j1FeiM" name="PluginProcessorBase.h" compile="0" resource="0"
+          file="../resources/PluginProcessorBase.h"/>
     <FILE id="gZgzcr" name="HADESLookAndFeel.h" compile="0" resource="0"
           file="../resources/HADESLookAndFeel.h"/>
     <FILE id="dJOC35" name="log2dSlider.cpp" compile="1" resource="0" file="../resources/log2dSlider.cpp"/>
@@ -310,13 +312,11 @@
                extraDefs="SAF_USE_APPLE_ACCELERATE_LP64&#10;SAF_ENABLE_SOFA_READER_MODULE&#10;SAF_ENABLE_HADES_MODULE"
                xcodeValidArchs="arm64,x86_64">
       <CONFIGURATIONS>
-        <CONFIGURATION name="Release" isDebug="0" optimisation="3" targetName="hades_renderer"
-                       binaryPath="" headerPath="../../../../../libs/ehades/include&#10;../../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../../SDKs/VST2_SDK&#10;"
+        <CONFIGURATION name="Release" isDebug="0" optimisation="3" binaryPath="" headerPath="../../../../../libs/ehades/include&#10;../../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../../SDKs/VST2_SDK&#10;"
                        osxArchitecture="64BitIntel" osxCompatibility="11.0 SDK" enablePluginBinaryCopyStep="1"
                        linkTimeOptimisation="1" userNotes="/opt/intel/compilers_and_libraries/mac/mkl/include"
                        macOSDeploymentTarget="11.0"/>
-        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="hades_renderer_debug"
-                       binaryPath="" headerPath="../../../../../libs/ehades/include&#10;../../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../../SDKs/VST2_SDK&#10;"
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" binaryPath="" headerPath="../../../../../libs/ehades/include&#10;../../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../../SDKs/VST2_SDK&#10;"
                        osxArchitecture="64BitIntel" osxCompatibility="11.0 SDK" enablePluginBinaryCopyStep="1"
                        macOSDeploymentTarget="11.0"/>
       </CONFIGURATIONS>
@@ -341,9 +341,9 @@
     <LINUX_MAKE targetFolder="make/LinuxMakefile" extraLinkerFlags="-L/usr/local/lib -lsaf_mkl_custom_lp64 -lsaf_ipp_custom&#10;-Wl,-rpath,/usr/local/lib"
                 extraCompilerFlags="-pedantic" extraDefs="SAF_USE_INTEL_MKL_LP64&#10;SAF_USE_INTEL_IPP&#10;SAF_ENABLE_SOFA_READER_MODULE&#10;SAF_ENABLE_HADES_MODULE">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" targetName="hades_renderer_debug" headerPath="../../../../libs/ehades/include&#10;../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../SDKs/VST2_SDK&#10;/opt/intel/oneapi/mkl/latest/include&#10;/opt/intel/oneapi/ipp/latest/include"
+        <CONFIGURATION isDebug="1" name="Debug" headerPath="../../../../libs/ehades/include&#10;../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../SDKs/VST2_SDK&#10;/opt/intel/oneapi/mkl/latest/include&#10;/opt/intel/oneapi/ipp/latest/include"
                        linkTimeOptimisation="1"/>
-        <CONFIGURATION isDebug="0" name="Release" targetName="hades_renderer" headerPath="../../../../libs/ehades/include&#10;../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../SDKs/VST2_SDK&#10;/opt/intel/oneapi/mkl/latest/include&#10;/opt/intel/oneapi/ipp/latest/include"
+        <CONFIGURATION isDebug="0" name="Release" headerPath="../../../../libs/ehades/include&#10;../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../SDKs/VST2_SDK&#10;/opt/intel/oneapi/mkl/latest/include&#10;/opt/intel/oneapi/ipp/latest/include"
                        linkTimeOptimisation="1"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
@@ -367,10 +367,8 @@
     <LINUX_MAKE targetFolder="make/LinuxMakefileRaspberryPI" extraDefs="SAF_USE_OPEN_BLAS_AND_LAPACKE&#10;SAF_ENABLE_SOFA_READER_MODULE&#10;SAF_ENABLE_HADES_MODULE"
                 extraLinkerFlags="-L/usr/lib/arm-linux-gnueabihf -lopenblas -llapacke">
       <CONFIGURATIONS>
-        <CONFIGURATION isDebug="1" name="Debug" headerPath="../../../../libs/ehades/include&#10;../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../SDKs/VST2_SDK&#10;/usr/include&#10;/usr/include/arm-linux-gnueabihf&#10;"
-                       targetName="hades_renderer_debug"/>
-        <CONFIGURATION isDebug="0" name="Release" headerPath="../../../../libs/ehades/include&#10;../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../SDKs/VST2_SDK&#10;/usr/include&#10;/usr/include/arm-linux-gnueabihf&#10;"
-                       targetName="hades_renderer"/>
+        <CONFIGURATION isDebug="1" name="Debug" headerPath="../../../../libs/ehades/include&#10;../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../SDKs/VST2_SDK&#10;/usr/include&#10;/usr/include/arm-linux-gnueabihf&#10;"/>
+        <CONFIGURATION isDebug="0" name="Release" headerPath="../../../../libs/ehades/include&#10;../../../../SDKs/Spatial_Audio_Framework/framework/include&#10;../../../../SDKs/VST2_SDK&#10;/usr/include&#10;/usr/include/arm-linux-gnueabihf&#10;"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_osc" path="../../SDKs/JUCE/modules"/>
