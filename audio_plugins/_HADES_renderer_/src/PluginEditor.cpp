@@ -262,7 +262,7 @@ PluginEditor::PluginEditor (PluginProcessor& p)
     publicationLink.setJustificationType(Justification::centredLeft);
 
     /* Specify screen refresh rate */
-    startTimer(120);
+    startTimer(100);
 
     currentWarning = k_warning_none;
 }
@@ -277,38 +277,16 @@ void PluginEditor::paint (juce::Graphics& g)
 {
     using namespace ColoursUI;
 
-    /* Background gradients */
-    drawVerticalGradient(g, {0,  30, 842,171}, bgDark1, bgDark2);
-    drawVerticalGradient(g, {0, 201, 842,247}, bgDark2, bgDark1);
-
-    /* Top rounded bar */
-    {
-        juce::Rectangle<float> r {1.f, 2.f, 840.f, 31.f};
-        g.setGradientFill(juce::ColourGradient(bgDark2,
-                                               r.getX(), r.getBottom(),
-                                               bgDark1,
-                                               r.getRight(), r.getY(),
-                                               false));
-        g.fillRoundedRectangle(r, 5.f);
-        g.setColour(borderGrey);
-        g.drawRoundedRectangle(r, 5.f, 2.f);
-    }
+    drawPluginBackgroundAndBanner(g, getBounds());
 
     /* Panels */
     drawPanel(g, {12, 58,212,158}, panelFill,      panelStroke);
     drawPanel(g, {12, 58,212, 33}, panelFillLight, panelStroke);
     drawPanel(g, {223,58,213,158}, panelFill, panelStroke);
     drawPanel(g, {223,58,213, 58}, panelFillLight, panelStroke);
-    drawPanel(g, {448, 58,382,382}, panelFill, panelStroke);
-    drawPanel(g, {12,240,422, 96}, panelFill, panelStroke);
+    drawPanelRect(g, {448, 58,382,382}, panelFill, panelStroke);
+    drawPanel(g, {12,238,422, 98}, panelFill, panelStroke);
     drawPanel(g, {12,335,422,105}, panelFill, panelStroke);
-
-    /* Borders */
-    g.setColour(borderGrey);
-    g.drawRect({0,   0, 842, 2}, 2);
-    g.drawRect({0,   0,   2,448}, 2);
-    g.drawRect({840, 0,   2,448}, 2);
-    g.drawRect({0, 446, 842, 2}, 2);
 
     /* Title */
     drawLabel(g, {12,1,120,32}, "HADES|", 18.8f);
