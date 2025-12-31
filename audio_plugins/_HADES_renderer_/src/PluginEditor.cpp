@@ -289,8 +289,8 @@ void PluginEditor::paint (juce::Graphics& g)
     drawPanel(g, {12,335,422,105}, panelFill, panelStroke);
 
     /* Title */
-    drawLabel(g, {12,1,120,32}, "HADES|", 18.8f);
-    drawLabel(g, {80,1,106,32}, "Renderer", 18.f, juce::Justification::centredLeft, juce::Colour(0xff00ffe6));
+    drawLabel(g, {12,1,120,32}, "HADES|", 18.f);
+    drawLabel(g, {82,1,106,32}, "Renderer", 18.f, juce::Justification::centredLeft, juce::Colour(0xff00ffe6));
 
     /* Section titles */
     drawLabel(g, {66, 33,149,30}, "Load Array IRs", 15.f);
