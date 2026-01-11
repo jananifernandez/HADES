@@ -24,12 +24,15 @@
 #include "../../resources/HADESLookAndFeel.h"
 
 typedef enum _HADES_WARNINGS{
+    /* Very problematic warnings (shown in red) */
     k_warning_none,
-    k_warning_frameSize,
     k_warning_supported_fs,
     k_warning_mismatch_fs,
     k_warning_NinputCH,
-    k_warning_NoutputCH
+    k_warning_NoutputCH,
+    
+    /* Less severe warnings (shown in yellow) */
+    k_warning_frameSize
 }HADES_WARNINGS;
 
 class PluginEditor  : public AudioProcessorEditor,
